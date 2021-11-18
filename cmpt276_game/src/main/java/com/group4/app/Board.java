@@ -146,6 +146,10 @@ class Board extends JLayeredPane implements ActionListener {
         grid[x][y].repaint();
     }
 
+    public MovingEnemy getMovingEnemy(){
+        return mEnemy;
+    }
+
     private void change(boardHolder Dir, int x, int y){
         if ( mEnemy != null )
             mEnemy.stopTimer();

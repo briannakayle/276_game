@@ -15,7 +15,6 @@ public class MovingEnemy extends NonAnimatedEnemy{
         super(x,y);
         t.stop();
         t = new Timer(100,this);
-        t.start();
         try{
             sprites[0] = ImageIO.read(new File("src/main/resources/bat1.PNG"));
             sprites[1] = ImageIO.read(new File("src/main/resources/bat2.PNG"));

@@ -97,6 +97,7 @@ class AppWindow extends JFrame{
         Board board1 = new Board(null,null,null,null,window);
         board1.addPlayer(Player);
         board1.addMovingEnemy(6,4);
+        board1.getMovingEnemy().startTimer();
 
         boardHolder level_1 = new boardHolder(board1);
 
@@ -122,7 +123,6 @@ class AppWindow extends JFrame{
         board1.addBarrier(10,1);
         board1.addBarrier(10,5);
         board1.addBonus(11,0);
-        board1.addBarrier(11,5);
         board1.addRegularRewards(3,3);
         board1.addRegularRewards(10,3);
         board1.addRegularRewards(6,0);
