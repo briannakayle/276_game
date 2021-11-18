@@ -219,7 +219,6 @@ class AppWindow extends JFrame{
         board4.addSlotComponent("wall","bottom");
         board4.addSlotComponent("wall","right");
         board4.addSlotComponent("wall","left");
-        board4.addBarrier(0,0);
         board4.addBarrier(0,3);
         board4.addBarrier(1,5);
         board4.addBarrier(2,1);

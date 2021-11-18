@@ -196,6 +196,7 @@ class Board extends JLayeredPane implements ActionListener {
             window.updateScoreTracker(3);
             remove(grid[i][j]);
             grid[i][j] = null;
+            tempSound.play("RR");
         }
         if ( identifier.equals("NAA") ){
             window.updateScoreTracker(-1);
@@ -205,7 +206,7 @@ class Board extends JLayeredPane implements ActionListener {
         }
         if ( identifier.equals("ME") ){
             if ( ++contact == 100 ){
-                tempSound.play("RR");
+                tempSound.play("NAA");
                 change(window.getGameOverBoard(),-1000000,-10000000);
                 window.gameOver();
             }
