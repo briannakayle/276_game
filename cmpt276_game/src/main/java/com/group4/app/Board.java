@@ -1,6 +1,7 @@
 package com.group4.app;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,10 @@ class Board extends JLayeredPane implements ActionListener {
     private  MovingEnemy mEnemy;
     private int contact = 0;
     private final baseElement[][] grid = new baseElement[12][7];
+    private Clip rewardClip; private Clip enemyClip;
+    private AudioInputStream rewardStream;
+    private AudioInputStream enemyStream;
+    private soundPlayer tempSound;
     /*
      * INDICES:
      * [0] = TOP SLOT
@@ -29,7 +34,6 @@ class Board extends JLayeredPane implements ActionListener {
      * */
     private final ArrayList<slotComponent> slots = new ArrayList<>(4);
     private final Timer t;
-
 
     private final collisionBox[] baseCollisionBoxes = new collisionBox[8];
 
@@ -55,6 +59,22 @@ class Board extends JLayeredPane implements ActionListener {
         setOpaque(false);
         setFocusable(false);
         t = new Timer(1, this);
+        try {
+            rewardStream = AudioSystem.getAudioInputStream(new File("src/main/resources/rupee.wav"));
+            enemyStream = AudioSystem.getAudioInputStream(new File("src/main/resources/enemy.wav"));
+
+            AudioFormat rewardFormat = rewardStream.getFormat();
+            AudioFormat enemyFormat = enemyStream.getFormat();
+
+            DataLine.Info rewardInfo = new DataLine.Info(Clip.class, rewardFormat);
+            DataLine.Info enemyInfo = new DataLine.Info(Clip.class, enemyFormat);
+
+            rewardClip = (Clip)AudioSystem.getLine(rewardInfo);
+            enemyClip = (Clip)AudioSystem.getLine(enemyInfo);
+        }   catch ( UnsupportedAudioFileException e ) { System.out.println("unsupported audio file"); }
+            catch ( IOException e ) { System.out.println("IOException"); }
+            catch ( LineUnavailableException e ) { System.out.println("line unavailable"); }
+        tempSound = new soundPlayer();
     }
 
     public void setUp(boardHolder up){
@@ -126,14 +146,14 @@ class Board extends JLayeredPane implements ActionListener {
         grid[x][y].repaint();
     }
 
-    public void setWindow(AppWindow window){
-        this.window = window;
-    }
-
     private void change(boardHolder Dir, int x, int y){
+        if ( mEnemy != null )
+            mEnemy.stopTimer();
+        if ( Dir.getHeld().mEnemy != null )
+            Dir.getHeld().mEnemy.startTimer();
         remove(player);
         window.remove(Holder);
-        window.add(Dir);
+        window.addBoard(Dir);
         window.setBoard(Dir);
         Dir.getHeld().addPlayer(player);
         player.setLocation(x,y);
@@ -141,11 +161,36 @@ class Board extends JLayeredPane implements ActionListener {
         Dir.repaint();
     }
 
+    private class soundPlayer{
+        soundPlayer(){
+            try {
+                rewardClip.open(rewardStream);
+                enemyClip.open(enemyStream);
+            } catch (LineUnavailableException | IOException e) { e.printStackTrace(); }
+        }
+        void play(String identifier){
+            if ( identifier.equals("NAA") ){
+                if ( enemyClip.isActive() )
+                    enemyClip.stop();
+                enemyClip.setFramePosition(0);
+                enemyClip.start();
+            }
+            if ( identifier.equals("RR") ) {
+                rewardClip.setFramePosition(0);
+                if ( rewardClip.isActive() )
+                    rewardClip.stop();
+                rewardClip.start();
+            }
+        }
+    }
+
     private void collectPoint(int i, int j, String identifier){
         if ( identifier.equals("RR") ) {
             window.updateScoreTracker(1);
+            window.updateRealTracker(1);
             remove(grid[i][j]);
             grid[i][j] = null;
+            tempSound.play("RR");
         }
         if ( identifier.equals("BR") ) {
             window.updateScoreTracker(3);
@@ -156,13 +201,13 @@ class Board extends JLayeredPane implements ActionListener {
             window.updateScoreTracker(-1);
             remove(grid[i][j]);
             grid[i][j] = null;
+            tempSound.play("NAA");
         }
         if ( identifier.equals("ME") ){
-            if ( contact == 0 )
-                window.updateScoreTracker(-1);
-            contact++;
-            if ( contact == 700 ){
-                contact = 0;
+            if ( ++contact == 100 ){
+                tempSound.play("RR");
+                change(window.getGameOverBoard(),-1000000,-10000000);
+                window.gameOver();
             }
         }
         repaint();
@@ -183,7 +228,7 @@ class Board extends JLayeredPane implements ActionListener {
     }
 
     private int checkMEnemyCollision(){
-        collisionBox enemyProjectedBox = new collisionBox(mEnemy.getX(),mEnemy.getY(),64,64);
+        collisionBox enemyProjectedBox = new collisionBox(mEnemy.getX()+16,mEnemy.getY()+16,32,32);
         int eX = (int)enemyProjectedBox.getX();
         int eY = (int)enemyProjectedBox.getY();
 
@@ -215,7 +260,6 @@ class Board extends JLayeredPane implements ActionListener {
         int pX = (int)playerProjectedBox.getX();
         int pY = (int)playerProjectedBox.getY();
 
-
         if (player.getDirection() == 180)
             playerProjectedBox.setLocation(pX - 10, pY);
         if (player.getDirection() == 0)
@@ -231,20 +275,21 @@ class Board extends JLayeredPane implements ActionListener {
             }
         }
         for (int i = 0; i < 4; i++) {
-            if (playerProjectedBox.intersects(slots.get(i).getCollision())){
-                if ( slots.get(i).getType().equals("door") ) {
-                    t.stop();
-                    if (slots.get(i).getPosition().equals("top"))
-                        change(up,490,700);
-                    if (slots.get(i).getPosition().equals("bottom"))
-                        change(down,490,285);
-                    if (slots.get(i).getPosition().equals("right"))
-                        change(right,100,495);
-                    if (slots.get(i).getPosition().equals("left"))
-                        change(left,855,495);
+            if ( slots.size() > 0 ) {
+                if (playerProjectedBox.intersects(slots.get(i).getCollision())) {
+                    if (slots.get(i).getType().equals("door")) {
+                        t.stop();
+                        if (slots.get(i).getPosition().equals("top"))
+                            change(up, 490, 700);
+                        if (slots.get(i).getPosition().equals("bottom"))
+                            change(down, 490, 285);
+                        if (slots.get(i).getPosition().equals("right"))
+                            change(right, 100, 495);
+                        if (slots.get(i).getPosition().equals("left"))
+                            change(left, 855, 495);
+                    } else
+                        return (i + 1) * 10;
                 }
-                else
-                    return (i + 1) * 10;
             }
         }
         for ( int i = 0; i < 12; i++ ){
@@ -262,6 +307,10 @@ class Board extends JLayeredPane implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if ( window.getsTracker().getRealMarks() == 17 ){
+            change(window.getWinBoard(),-1000000,-10000000);
+            window.gameOver();
+        }
         bonusTicker++;
         if ( bonusTicker >= 15000 ){
             removeBonus();

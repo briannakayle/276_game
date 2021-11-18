@@ -34,6 +34,13 @@ public class MovingEnemy extends NonAnimatedEnemy{
         return direction;
     }
 
+    public void startTimer(){
+        t.start();
+    }
+    public void stopTimer(){
+        t.stop();
+    }
+
     public void setNoMove(int noMove) {
         this.noMove = noMove;
     }

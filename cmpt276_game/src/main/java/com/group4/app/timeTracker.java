@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class timeTracker extends tracker implements ActionListener {
-    private Timer t;
+    private final Timer t;
     private int seconds = 0;
 
     public timeTracker(){
@@ -26,6 +26,10 @@ public class timeTracker extends tracker implements ActionListener {
         holder.add(display);
         display.repaint();
         holder.repaint();
+    }
+
+    public void stopTimer(){
+        t.stop();
     }
 
     @Override
