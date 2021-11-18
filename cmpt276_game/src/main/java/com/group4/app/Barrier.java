@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-class Barrier extends entity{
+class Barrier extends baseElement{
 
     public Barrier(int x, int y){
         setSize(64,64);
@@ -13,7 +13,7 @@ class Barrier extends entity{
         try{
             image = ImageIO.read(new File("src/main/resources/obstacle.PNG"));
         }catch(IOException e){ System.out.println("Barrier Sprite not found"); }
-        collision = new collisionBox(getX()+4,getY()+4,56,56);
+        collision = new collisionBox(getX()+7,getY()+7,50,50);
         repaint();
     }
     @Override

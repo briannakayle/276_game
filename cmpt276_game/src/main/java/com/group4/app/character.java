@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-class character extends entity implements ActionListener, KeyListener {
+class character extends baseElement implements ActionListener, KeyListener {
     private int noMove = -1;
     private int direction = -1;
     private int drawX = 0; private int drawY = 0;
@@ -48,7 +48,7 @@ class character extends entity implements ActionListener, KeyListener {
         direction = -1;
     }
 
-    private class spriteAnimListener implements ActionListener{
+    public class spriteAnimListener implements ActionListener{
         private int animFrame = 0;
         public Timer t2;
 
@@ -148,7 +148,6 @@ class character extends entity implements ActionListener, KeyListener {
     }
 
     public void refresh(){
-        //direction = -1;
         noMove = -1;
         t1.restart();
     }
@@ -170,15 +169,6 @@ class character extends entity implements ActionListener, KeyListener {
     }
     public int getDirection(){
         return direction;
-    }
-    public int getDrawX(){
-        return drawX;
-    }
-    public int getDrawY() {
-        return drawY;
-    }
-    public void setDirection(int direction){
-        this.direction = direction;
     }
     public void setNoMove(int direction){
         noMove = direction;

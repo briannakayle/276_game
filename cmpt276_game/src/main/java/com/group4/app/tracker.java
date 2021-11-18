@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 class tracker{
-    final public String workingDirectory = "/Users/efe/Documents/Simon Fraser University/FALL 2021/CMPT 276/project/cmpt276_game/src/main";
     protected final JPanel holder;
     protected JLabel display;
     protected Font customFont;
@@ -31,8 +30,5 @@ class tracker{
 
     public JPanel getHolder() {
         return holder;
-    }
-    public JLabel getDisplay(){
-        return display;
     }
 }

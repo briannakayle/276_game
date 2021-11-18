@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-class RegularRewards extends entity{
+class RegularRewards extends baseElement{
 
     public RegularRewards(int x, int y){
         setSize(64,64);

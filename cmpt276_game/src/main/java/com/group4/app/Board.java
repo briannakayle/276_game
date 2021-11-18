@@ -17,7 +17,9 @@ class Board extends JLayeredPane implements ActionListener {
     private int bonusTicker = 0;
     private int bX, bY;
     private character player;
-    private final entity[][] grid = new entity[12][7];
+    private  MovingEnemy mEnemy;
+    private int contact = 0;
+    private final baseElement[][] grid = new baseElement[12][7];
     /*
      * INDICES:
      * [0] = TOP SLOT
@@ -25,8 +27,9 @@ class Board extends JLayeredPane implements ActionListener {
      * [2] = RIGHT SLOT
      * [3] = LEFT SLOT
      * */
-    private ArrayList<slotComponent> slots = new ArrayList<>(4);
+    private final ArrayList<slotComponent> slots = new ArrayList<>(4);
     private final Timer t;
+
 
     private final collisionBox[] baseCollisionBoxes = new collisionBox[8];
 
@@ -116,6 +119,13 @@ class Board extends JLayeredPane implements ActionListener {
         grid[x][y].repaint();
     }
 
+    public void addMovingEnemy(int x, int y){
+        grid[x][y] = new MovingEnemy((x*64)+128,(y*64)+304);
+        mEnemy = (MovingEnemy)grid[x][y];
+        add(grid[x][y]);
+        grid[x][y].repaint();
+    }
+
     public void setWindow(AppWindow window){
         this.window = window;
     }
@@ -132,15 +142,29 @@ class Board extends JLayeredPane implements ActionListener {
     }
 
     private void collectPoint(int i, int j, String identifier){
-        if ( identifier.equals("RR") )
+        if ( identifier.equals("RR") ) {
             window.updateScoreTracker(1);
-        if ( identifier.equals("BR") )
+            remove(grid[i][j]);
+            grid[i][j] = null;
+        }
+        if ( identifier.equals("BR") ) {
             window.updateScoreTracker(3);
+            remove(grid[i][j]);
+            grid[i][j] = null;
+        }
         if ( identifier.equals("NAA") ){
             window.updateScoreTracker(-1);
+            remove(grid[i][j]);
+            grid[i][j] = null;
         }
-        remove(grid[i][j]);
-        grid[i][j] = null;
+        if ( identifier.equals("ME") ){
+            if ( contact == 0 )
+                window.updateScoreTracker(-1);
+            contact++;
+            if ( contact == 700 ){
+                contact = 0;
+            }
+        }
         repaint();
     }
 
@@ -158,29 +182,56 @@ class Board extends JLayeredPane implements ActionListener {
         g.drawImage(BaseBoard, 0, 0, this);
     }
 
-    private int checkCollision(){
-        RegularRewards test1 = null;
-        NonAnimatedEnemy test2 = null;
-        collisionBox projectedBox = new collisionBox(player.getX(),player.getY(),64,64);
-        int x = (int)projectedBox.getX();
-        int y = (int)projectedBox.getY();
+    private int checkMEnemyCollision(){
+        collisionBox enemyProjectedBox = new collisionBox(mEnemy.getX(),mEnemy.getY(),64,64);
+        int eX = (int)enemyProjectedBox.getX();
+        int eY = (int)enemyProjectedBox.getY();
 
-        if (player.getDirection() == 180)
-            projectedBox.setLocation(x - 10, y);
-        if (player.getDirection() == 0)
-            projectedBox.setLocation(x + 10, y);
-        if (player.getDirection() == 270)
-            projectedBox.setLocation(x, y + 10);
-        if (player.getDirection() == 90)
-            projectedBox.setLocation(x, y - 10);
+        if (mEnemy.getDirection() == 180)
+            enemyProjectedBox.setLocation(eX - 10, eY);
+        if (mEnemy.getDirection() == 0)
+            enemyProjectedBox.setLocation(eX + 10, eY);
+        if (mEnemy.getDirection() == 270)
+            enemyProjectedBox.setLocation(eX, eY + 10);
+        if (mEnemy.getDirection() == 90)
+            enemyProjectedBox.setLocation(eX, eY - 10);
 
         for ( int i = 0; i<8; i++ ) {
-            if (projectedBox.intersects(baseCollisionBoxes[i])) {
+            if (enemyProjectedBox.intersects(baseCollisionBoxes[i])) {
+                return i;
+            }
+        }
+        for (int i = 0; i < 4; i++)
+            if (enemyProjectedBox.intersects(slots.get(i).getCollision()))
+                return (i + 1) * 10;
+        return -1;
+    }
+
+    private int checkPlayerCollision(){
+        RegularRewards test1 = null;
+        NonAnimatedEnemy test2 = null;
+        collisionBox playerProjectedBox = new collisionBox(player.getX(),player.getY(),64,64);
+
+        int pX = (int)playerProjectedBox.getX();
+        int pY = (int)playerProjectedBox.getY();
+
+
+        if (player.getDirection() == 180)
+            playerProjectedBox.setLocation(pX - 10, pY);
+        if (player.getDirection() == 0)
+            playerProjectedBox.setLocation(pX + 10, pY);
+        if (player.getDirection() == 270)
+            playerProjectedBox.setLocation(pX, pY + 10);
+        if (player.getDirection() == 90)
+            playerProjectedBox.setLocation(pX, pY - 10);
+
+        for ( int i = 0; i<8; i++ ) {
+            if (playerProjectedBox.intersects(baseCollisionBoxes[i])) {
                 return i;
             }
         }
         for (int i = 0; i < 4; i++) {
-            if (projectedBox.intersects(slots.get(i).getCollision())){
+            if (playerProjectedBox.intersects(slots.get(i).getCollision())){
                 if ( slots.get(i).getType().equals("door") ) {
                     t.stop();
                     if (slots.get(i).getPosition().equals("top"))
@@ -199,7 +250,7 @@ class Board extends JLayeredPane implements ActionListener {
         for ( int i = 0; i < 12; i++ ){
             for ( int j = 0; j < 7; j++ ){
                 try {
-                    if (projectedBox.intersects(grid[i][j].getCollision()))
+                    if (playerProjectedBox.intersects(grid[i][j].getCollision()))
                         try {
                             test1 = (RegularRewards)grid[i][j];
                             collectPoint(i,j,test1.getIdentifier());
@@ -216,7 +267,7 @@ class Board extends JLayeredPane implements ActionListener {
             removeBonus();
         }
         if ( player != null ) {
-            int colDir = checkCollision();
+            int colDir = checkPlayerCollision();
             if (colDir != -1) {
                 if (colDir == 0) {
                     if (player.getY() >= 304)
@@ -285,6 +336,77 @@ class Board extends JLayeredPane implements ActionListener {
                 }
             } else
                 player.setNoMove(-1);
+        }
+        if ( mEnemy != null ) {
+            int colDir = checkMEnemyCollision();
+            if (colDir != -1) {
+                if (colDir == 0) {
+                    if (mEnemy.getY() >= 304)
+                        mEnemy.setNoMove(90);
+                    else
+                        mEnemy.setNoMove(0);
+                }
+                if (colDir == 4) {
+                    if (mEnemy.getY() >= 304)
+                        mEnemy.setNoMove(90);
+                    else
+                        mEnemy.setNoMove(180);
+                }
+                if (colDir == 2) {
+                    if (mEnemy.getY() >= 699) {
+                        mEnemy.setNoMove(0);
+                    }
+                    else {
+                        mEnemy.setNoMove(270);
+                    }
+                }
+                if (colDir == 6) {
+                    if (mEnemy.getY() >= 699)
+                        mEnemy.setNoMove(180);
+                    else
+                        mEnemy.setNoMove(270);
+                }
+                if (colDir == 5) {
+                    if (mEnemy.getX() <= 128)
+                        mEnemy.setNoMove(90);
+                    else
+                        mEnemy.setNoMove(180);
+                }
+                if (colDir == 7) {
+                    if (mEnemy.getX() <= 128)
+                        mEnemy.setNoMove(270);
+                    else
+                        mEnemy.setNoMove(180);
+                }
+                if (colDir == 1) {
+                    if (mEnemy.getX() >= 850) {
+                        mEnemy.setNoMove(90);
+                    }
+                    else {
+                        mEnemy.setNoMove(0);
+                    }
+                }
+                if (colDir == 3) {
+                    if (mEnemy.getX() >= 850)
+                        mEnemy.setNoMove(270);
+                    else {
+                        mEnemy.setNoMove(0);
+                    }
+                }
+                if ( colDir == 10 || colDir == 105 ) {
+                    mEnemy.setNoMove(90);
+                }
+                if ( colDir == 20 || colDir == 285) {
+                    mEnemy.setNoMove(270);
+                }
+                if ( colDir == 30 || colDir == 15) {
+                    mEnemy.setNoMove(0);
+                }
+                if ( colDir == 40 || colDir == 195 ){
+                    mEnemy.setNoMove(180);
+                }
+            } else
+                mEnemy.setNoMove(-1);
         }
     }
 }

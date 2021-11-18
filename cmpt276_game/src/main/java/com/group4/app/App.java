@@ -46,9 +46,9 @@ class AppWindow extends JFrame{
 
         Board board1 = new Board(null,null,null,null,window);  //1,2
         board1.addPlayer(Player);
+        board1.addMovingEnemy(6,4);
 
         boardHolder level_1 = new boardHolder(board1);
-
 
         board1.addSlotComponent("door","top");
         board1.addSlotComponent("wall","bottom");
@@ -74,6 +74,8 @@ class AppWindow extends JFrame{
         board1.addBonus(11,0);
         board1.addBarrier(11,5);
         board1.addRegularRewards(3,3);
+        board1.addRegularRewards(10,3);
+        board1.addRegularRewards(6,0);
         board1.addNonAnimatedEnemy(0,0);
 
 
@@ -81,24 +83,83 @@ class AppWindow extends JFrame{
 
         boardHolder level_2 = new boardHolder(board2);
         board1.setUp(level_2);
+        board2.addMovingEnemy(7,2);
 
         board2.addSlotComponent("wall","top");
         board2.addSlotComponent("door","bottom");
         board2.addSlotComponent("wall","right");
         board2.addSlotComponent("wall","left");
-        board2.addBarrier(2,2);
-        board2.addRegularRewards(4,4);
+        board2.addBarrier(1,0);
+        board2.addBarrier(1,1);
+        board2.addBarrier(1,5);
+        board2.addBarrier(1,6);
+        board2.addBarrier(2,3);
+        board2.addBarrier(3,0);
+        board2.addBarrier(3,1);
+        board2.addBarrier(3,4);
+        board2.addBarrier(4,3);
+        board2.addBarrier(4,6);
+        board2.addBarrier(5,2);
+        board2.addBarrier(6,0);
+        board2.addBarrier(6,3);
+        board2.addBarrier(6,4);
+        board2.addBarrier(7,3);
+        board2.addBarrier(8,1);
+        board2.addBarrier(9,4);
+        board2.addBarrier(10,2);
+        board2.addBarrier(10,5);
+        board2.addBarrier(11,1);
+        board2.addBarrier(11,6);
+        board2.addRegularRewards(0,4);
+        board2.addRegularRewards(3,2);
+        board2.addRegularRewards(8,2);
+        board2.addRegularRewards(11,5);
+        board2.addNonAnimatedEnemy(1,4);
+        board2.addNonAnimatedEnemy(5,0);
 
         Board board3 = new Board(null,null,null,level_1,window);    //1,1
 
         boardHolder level_3 = new boardHolder(board3);
         board1.setRight(level_3);
+        board3.addMovingEnemy(6,2);
 
         board3.addSlotComponent("wall","top");
         board3.addSlotComponent("wall","bottom");
         board3.addSlotComponent("wall","right");
         board3.addSlotComponent("door","left");
-        board3.addBarrier(11,6);
+        board3.addBarrier(0,0);
+        board3.addBarrier(0,5);
+        board3.addBarrier(1,1);
+        board3.addBarrier(1,4);
+        board3.addBarrier(2,3);
+        board3.addBarrier(3,1);
+        board3.addBarrier(4,3);
+        board3.addBarrier(4,4);
+        board3.addBarrier(4,5);
+        board3.addBarrier(5,1);
+        board3.addBarrier(5,5);
+        board3.addBarrier(6,3);
+        board3.addBarrier(6,4);
+        board3.addBarrier(6,5);
+        board3.addBarrier(7,1);
+        board3.addBarrier(8,1);
+        board3.addBarrier(8,2);
+        board3.addBarrier(8,3);
+        board3.addBarrier(8,5);
+        board3.addBarrier(8,6);
+        board3.addBarrier(9,5);
+        board3.addBarrier(10,1);
+        board3.addBarrier(10,2);
+        board3.addBarrier(10,3);
+        board3.addBarrier(10,5);
+        board3.addRegularRewards(1,5);
+        board3.addRegularRewards(2,4);
+        board3.addRegularRewards(5,4);
+        board3.addRegularRewards(5,6);
+        board3.addRegularRewards(11,3);
+        board3.addNonAnimatedEnemy(3,6);
+        board3.addNonAnimatedEnemy(4,2);
+        board3.addNonAnimatedEnemy(10,0);
 
         window.addBoard(level_1);
         window.repaint();

@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-class slotComponent extends entity{
+class slotComponent extends baseElement{
     private final String type;
     private final String position;
     int wall_x = 0; int wall_y = 0; int door_x = 0; int door_y = 0;

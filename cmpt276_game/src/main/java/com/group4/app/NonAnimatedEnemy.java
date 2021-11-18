@@ -10,9 +10,9 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class NonAnimatedEnemy extends RegularRewards implements ActionListener {
-    final private BufferedImage[] sprites = new BufferedImage[2];
-    private int frameCount = 0;
-    private Timer t;
+    final protected BufferedImage[] sprites = new BufferedImage[2];
+    protected int frameCount = 0;
+    protected Timer t;
 
     public NonAnimatedEnemy(int x, int y){
         t = new Timer(750,this);
@@ -24,9 +24,10 @@ public class NonAnimatedEnemy extends RegularRewards implements ActionListener {
             sprites[1] = ImageIO.read(new File("src/main/resources/stalfos2.PNG"));
             image = sprites[0];
         }catch(IOException e){ System.out.println("NonAnimatedEnemy Sprite not found"); }
-        collision = new collisionBox(getX()+4,getY()+4,56,56);
+        collision = new collisionBox(getX()+27,getY()+27,10,10);
         repaint();
     }
+
     @Override
     public void paintComponent(Graphics g){
         g.drawImage(image, 4, 4, this);
