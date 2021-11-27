@@ -6,10 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class TimeTrackerView extends tracker implements ActionListener {
-    TimeTracker timeTracker = new TimeTracker();
+    TimeTracker timeTracker;
 
     public TimeTrackerView(){
         super();
+        timeTracker = new TimeTracker(this);
         timeTracker.startTimer();
         holder.setLocation(650,30);
         refresh();
@@ -30,5 +31,9 @@ public class TimeTrackerView extends tracker implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         timeTracker.actionPerformed(e);
         refresh();
+    }
+
+    public void stopTimer(){
+        timeTracker.stopTimer();
     }
 }

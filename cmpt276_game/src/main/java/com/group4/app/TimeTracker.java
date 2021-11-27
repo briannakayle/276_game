@@ -9,8 +9,8 @@ public class TimeTracker  implements ActionListener {
         private final Timer t;
         private int seconds = 0;
 
-    public TimeTracker() {
-        t = new Timer(1250,this);
+    public TimeTracker(ActionListener listener) {
+        t = new Timer(1250,listener);
     }
 
     public int getSeconds(){
