@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class timeTracker extends tracker implements ActionListener {
+public class TimeTrackerView extends tracker implements ActionListener {
     private final Timer t;
     private int seconds = 0;
 
-    public timeTracker(){
+    public TimeTrackerView(){
         super();
         t = new Timer(1250,this);
         t.start();
