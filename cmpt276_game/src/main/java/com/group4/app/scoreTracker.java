@@ -33,6 +33,10 @@ class scoreTracker extends tracker {
         return realMarks;
     }
 
+    public int getMarks() {
+        return marks;
+    }
+
     public JPanel getHolder() {
         return holder;
     }

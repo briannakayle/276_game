@@ -11,6 +11,7 @@ class AppWindow extends JFrame{
     private Board currentBoard;
     private boardHolder gameOverBoard;
     private boardHolder winBoard;
+    private final File audioFile;
     private final scoreTracker sTracker;
     private final timeTracker tTracker;
 
@@ -38,12 +39,20 @@ class AppWindow extends JFrame{
         return sTracker;
     }
 
+    public timeTracker gettTracker() {
+        return tTracker;
+    }
+
     public boardHolder getGameOverBoard(){
         return gameOverBoard;
     }
 
     public boardHolder getWinBoard() {
         return winBoard;
+    }
+
+    public File getAudioFile(){
+        return audioFile;
     }
 
     public void gameOver(){
@@ -69,7 +78,7 @@ class AppWindow extends JFrame{
         add(sTracker.getHolder());
         tTracker = new timeTracker();
         add(tTracker.getHolder());
-        File audioFile = new File("src/main/resources/music.wav");
+        audioFile = new File("src/main/resources/music.wav");
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             AudioFormat format = audioStream.getFormat();
@@ -77,7 +86,7 @@ class AppWindow extends JFrame{
             Clip music = (Clip) AudioSystem.getLine(info);
             music.open(audioStream);
             music.start();
-        }   catch ( UnsupportedAudioFileException e ) { System.out.println("unsupported audio file"); }
+        }   catch ( UnsupportedAudioFileException e ){ System.out.println("unsupported audio file for background music"); }
             catch ( IOException e ) { System.out.println("IOException"); }
             catch ( LineUnavailableException e ) { System.out.println("line unavailable"); }
     }
@@ -97,7 +106,7 @@ class AppWindow extends JFrame{
         Board board1 = new Board(null,null,null,null,window);
         board1.addPlayer(Player);
         board1.addMovingEnemy(6,4);
-        board1.getMovingEnemy().startTimer();
+        board1.mEnemy.startTimer();
 
         boardHolder level_1 = new boardHolder(board1);
 
@@ -171,7 +180,7 @@ class AppWindow extends JFrame{
 
         boardHolder level_3 = new boardHolder(board3);
         board1.setRight(level_3);
-        board3.addMovingEnemy(8,3);
+        board3.addMovingEnemy(8,4);
 
         board3.addSlotComponent("wall","top");
         board3.addSlotComponent("door","bottom");
