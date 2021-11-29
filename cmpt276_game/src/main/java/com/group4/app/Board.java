@@ -12,19 +12,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 class Board extends JLayeredPane implements ActionListener {
-    private boardHolder up, down, left, right, Holder;
-    private BufferedImage BaseBoard;
-    private AppWindow window;
-    private int bonusTicker = 0;
-    private int bX, bY;
-    private character player;
-    private  MovingEnemy mEnemy;
-    private int contact = 0;
-    private final baseElement[][] grid = new baseElement[12][7];
-    private Clip rewardClip; private Clip enemyClip;
-    private AudioInputStream rewardStream;
-    private AudioInputStream enemyStream;
-    private soundPlayer tempSound;
+    protected boardHolder up, down, left, right, Holder;
+    protected BufferedImage BaseBoard;
+    protected AppWindow window;
+    protected int bonusTicker = 0;
+    protected int bX, bY;
+    protected character player;
+    protected  MovingEnemy mEnemy;
+    protected int contact = 0;
+    protected final baseElement[][] grid = new baseElement[12][7];
+    protected Clip rewardClip;
+    protected Clip enemyClip;
+    protected AudioInputStream rewardStream;
+    protected AudioInputStream enemyStream;
+    protected final soundPlayer tempSound;
     /*
      * INDICES:
      * [0] = TOP SLOT
@@ -32,10 +33,10 @@ class Board extends JLayeredPane implements ActionListener {
      * [2] = RIGHT SLOT
      * [3] = LEFT SLOT
      * */
-    private final ArrayList<slotComponent> slots = new ArrayList<>(4);
-    private final Timer t;
+    protected final ArrayList<slotComponent> slots = new ArrayList<>(4);
+    protected final Timer t;
 
-    private final collisionBox[] baseCollisionBoxes = new collisionBox[8];
+    protected final collisionBox[] baseCollisionBoxes = new collisionBox[8];
 
     public void setWallBounds(){
         baseCollisionBoxes[0] = new collisionBox(577,177,320,128);  //right top hor
@@ -108,46 +109,64 @@ class Board extends JLayeredPane implements ActionListener {
     }
 
     public void addSlotComponent(String comp, String pos){
-        slotComponent component = new slotComponent(comp, pos);
-        add(component,2);
-        slots.add(component);
-        repaint();
+        if ( slots.size() < 4 ) {
+            slotComponent component = new slotComponent(comp, pos);
+            add(component, 2);
+            slots.add(component);
+            repaint();
+        }
+    }
+
+    private boolean checkGridSpot(int x, int y){
+        return grid[x][y] == null;
     }
 
     public void addBarrier(int x, int y){
-        grid[x][y] = new Barrier((x*64)+128,(y*64)+304);
-        add(grid[x][y]);
-        grid[x][y].repaint();
+        if ( checkGridSpot(x,y) ) {
+            grid[x][y] = new Barrier((x * 64) + 128, (y * 64) + 304);
+            add(grid[x][y]);
+            grid[x][y].repaint();
+        }
+        else System.out.println("Grid spot already occupied");
     }
 
     public void addRegularRewards(int x, int y){
-        grid[x][y] = new RegularRewards((x*64)+128,(y*64)+304);
-        add(grid[x][y]);
-        grid[x][y].repaint();
+        if ( checkGridSpot(x,y) ) {
+            grid[x][y] = new RegularRewards((x * 64) + 128, (y * 64) + 304);
+            add(grid[x][y]);
+            grid[x][y].repaint();
+        }
+        else System.out.println("Grid spot already occupied");
     }
 
-    public void addBonus(int x, int y){
-        grid[x][y] = new Bonus((x*64)+128,(y*64)+304);
-        add(grid[x][y]);
-        grid[x][y].repaint();
-        bX = x; bY = y;
+    public void addBonus(int x, int y) {
+        if ( checkGridSpot(x,y) ) {
+            grid[x][y] = new Bonus((x * 64) + 128, (y * 64) + 304);
+            add(grid[x][y]);
+            grid[x][y].repaint();
+            bX = x;
+            bY = y;
+        }
+        else System.out.println("Grid spot already occupied");
     }
 
     public void addNonAnimatedEnemy(int x, int y){
-        grid[x][y] = new NonAnimatedEnemy((x*64)+128,(y*64)+304);
-        add(grid[x][y]);
-        grid[x][y].repaint();
+        if ( checkGridSpot(x,y) ) {
+            grid[x][y] = new NonAnimatedEnemy((x*64)+128,(y*64)+304);
+            add(grid[x][y]);
+            grid[x][y].repaint();
+        }
+        else System.out.println("Grid spot already occupied");
     }
 
     public void addMovingEnemy(int x, int y){
-        grid[x][y] = new MovingEnemy((x*64)+128,(y*64)+304);
-        mEnemy = (MovingEnemy)grid[x][y];
-        add(grid[x][y]);
-        grid[x][y].repaint();
-    }
-
-    public MovingEnemy getMovingEnemy(){
-        return mEnemy;
+        if ( checkGridSpot(x,y) ) {
+            grid[x][y] = new MovingEnemy((x*64)+128,(y*64)+304);
+            mEnemy = (MovingEnemy)grid[x][y];
+            add(grid[x][y]);
+            grid[x][y].repaint();
+        }
+        else System.out.println("Grid spot already occupied");
     }
 
     private void change(boardHolder Dir, int x, int y){
@@ -188,7 +207,7 @@ class Board extends JLayeredPane implements ActionListener {
         }
     }
 
-    private void collectPoint(int i, int j, String identifier){
+    protected void collectPoint(int i, int j, String identifier){
         if ( identifier.equals("RR") ) {
             window.updateScoreTracker(1);
             window.updateRealTracker(1);
@@ -232,7 +251,7 @@ class Board extends JLayeredPane implements ActionListener {
         g.drawImage(BaseBoard, 0, 0, this);
     }
 
-    private int checkMEnemyCollision(){
+    protected int checkMEnemyCollision(){
         collisionBox enemyProjectedBox = new collisionBox(mEnemy.getX()+16,mEnemy.getY()+16,32,32);
         int eX = (int)enemyProjectedBox.getX();
         int eY = (int)enemyProjectedBox.getY();
@@ -252,12 +271,12 @@ class Board extends JLayeredPane implements ActionListener {
             }
         }
         for (int i = 0; i < 4; i++)
-            if (enemyProjectedBox.intersects(slots.get(i).getCollision()))
+            if ( slots.size() > 0 && enemyProjectedBox.intersects(slots.get(i).getCollision()) )
                 return (i + 1) * 10;
         return -1;
     }
 
-    private int checkPlayerCollision(){
+    protected int checkPlayerCollision(){
         RegularRewards test1 = null;
         NonAnimatedEnemy test2 = null;
         collisionBox playerProjectedBox = new collisionBox(player.getX(),player.getY(),64,64);
@@ -269,7 +288,7 @@ class Board extends JLayeredPane implements ActionListener {
             playerProjectedBox.setLocation(pX - 10, pY);
         if (player.getDirection() == 0)
             playerProjectedBox.setLocation(pX + 10, pY);
-        if (player.getDirection() == 270)
+        if (player.getDirection() == 270 || player.getDirection() == -1)
             playerProjectedBox.setLocation(pX, pY + 10);
         if (player.getDirection() == 90)
             playerProjectedBox.setLocation(pX, pY - 10);
@@ -299,13 +318,13 @@ class Board extends JLayeredPane implements ActionListener {
         }
         for ( int i = 0; i < 12; i++ ){
             for ( int j = 0; j < 7; j++ ){
-                try {
+                if ( grid[i][j] != null ) {
                     if (playerProjectedBox.intersects(grid[i][j].getCollision()))
                         try {
                             test1 = (RegularRewards)grid[i][j];
                             collectPoint(i,j,test1.getIdentifier());
                         }catch(ClassCastException e1){ return player.getDirection() + 15; }
-                }catch (NullPointerException ignored){}
+                }
             }
         }
         return -1;

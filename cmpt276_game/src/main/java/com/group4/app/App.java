@@ -11,9 +11,14 @@ class AppWindow extends JFrame{
     private Board currentBoard;
     private boardHolder gameOverBoard;
     private boardHolder winBoard;
+<<<<<<< HEAD
     private final File audioFile;
     private final scoreTracker sTracker;
     private final timeTracker tTracker;
+=======
+    private final ScoreTrackerView sTracker;
+    private final TimeTrackerView tTracker;
+>>>>>>> 1c3bef264593e3bc9cafdad0491f364a19fe4643
 
     public void setBoard(boardHolder target){
         if ( currentBoard != null ) {
@@ -35,7 +40,7 @@ class AppWindow extends JFrame{
         sTracker.addRealMarks(i);
     }
 
-    public scoreTracker getsTracker() {
+    public ScoreTrackerView getsTracker() {
         return sTracker;
     }
 
@@ -74,9 +79,9 @@ class AppWindow extends JFrame{
         setResizable(false);
         setSize(1024, 880);
         setVisible(true);
-        sTracker = new scoreTracker();
+        sTracker = new ScoreTrackerView();
         add(sTracker.getHolder());
-        tTracker = new timeTracker();
+        tTracker = new TimeTrackerView();
         add(tTracker.getHolder());
         audioFile = new File("src/main/resources/music.wav");
         try {
