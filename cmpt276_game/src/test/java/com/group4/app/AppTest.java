@@ -1,20 +1,33 @@
 package com.group4.app;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
+public class AppTest {
+    private static AppWindow window;
+
+    @BeforeAll
+    static void setup(){
+        window = new AppWindow();
+    }
+
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    @DisplayName("SetupTest")
+    public void setupTest(){
+        assertNotNull(window);
+        assertNotNull(window.gettTracker());
+        assertNotNull(window.getsTracker());
+        assertNotNull(window.getAudioFile());
+    }
+
+    @Test
+    public void updateScoreTrackerTest() {
+        window.updateScoreTracker(100);
+        assertEquals(100, window.getsTracker().getMarks());
+        window.updateRealTracker(100);
+        assertEquals(100, window.getsTracker().getMarks());
+        assertEquals(100, window.getsTracker().getRealMarks());
     }
 }
