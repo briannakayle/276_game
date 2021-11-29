@@ -3,20 +3,21 @@ package com.group4.app;
 import javax.swing.*;
 import java.awt.*;
 
-class ScoreTrackerView extends tracker {
-    ScoreTracker scoreTracker = new ScoreTracker();
+class scoreTracker extends tracker {
+    private int marks = 0;
+    private int realMarks = 0;
 
-    public ScoreTrackerView() {
+    public scoreTracker() {
         super();
         holder.setLocation(100, 30);
         addMarks(0);
     }
 
     public void addMarks(int i) {
-        scoreTracker.addMarks(i);
+        marks += i;
         holder.remove(display);
         holder.repaint();
-        display = new JLabel("Score: " + getMarks(), SwingConstants.LEFT);
+        display = new JLabel("Score: " + marks, SwingConstants.LEFT);
         display.setForeground(Color.white);
         display.setFont(customFont);
         display.setSize(400, 120);
@@ -26,14 +27,10 @@ class ScoreTrackerView extends tracker {
     }
 
     public void addRealMarks(int i) {
-        scoreTracker.addRealMarks(i);
-    }
+        realMarks += i; }
 
-    public int getMarks(){
-        return scoreTracker.getMarks();
-    }
     public int getRealMarks() {
-        return scoreTracker.getRealMarks();
+        return realMarks;
     }
 
     public int getMarks() {
