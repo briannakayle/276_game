@@ -13,6 +13,12 @@ public class AppTest {
         window = new AppWindow();
     }
 
+    @AfterEach
+    void cleanup(){
+        window = new AppWindow();
+    }
+
+
     @Test
     @DisplayName("Setup Test")
     public void constructorTest(){
@@ -48,8 +54,16 @@ public class AppTest {
         assertNotNull(window.currentBoard);
         assert(board1.t.isRunning());
         board1.change(holder2,0,0);
+        assert(!board1.t.isRunning());
+        assert(board2.t.isRunning());
         assertEquals(window.currentBoard, board2);
         board2.change(holder1,0,0);
         assertEquals(window.currentBoard, board1);
+        board1.addRegularRewards(0,0);
+        board1.addNonAnimatedEnemy(0,1);
+        board1.collectPoint(0,0,"RR");
+        assert(window.getsTracker().getMarks() == 1);
+        board1.collectPoint(0,1,"NAE");
+        assert(window.getsTracker().getMarks() == 0);
     }
 }
