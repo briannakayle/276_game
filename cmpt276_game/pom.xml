@@ -18,6 +18,13 @@
       <scope>test</scope>
     </dependency>
 
+   <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>RELEASE</version>
+    <scope>test</scope>
+   </dependency>
+   
     <!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
     <!-- Enables any legacy JUnit 3 and JUnit 4 tests you may have. Not needed for JUnit 5 tests. -->
     <dependency>
