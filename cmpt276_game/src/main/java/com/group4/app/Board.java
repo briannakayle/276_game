@@ -169,7 +169,7 @@ class Board extends JLayeredPane implements ActionListener {
         else System.out.println("Grid spot already occupied");
     }
 
-    private void change(boardHolder Dir, int x, int y){
+    protected void change(boardHolder Dir, int x, int y){
         if ( mEnemy != null )
             mEnemy.stopTimer();
         if ( Dir.getHeld().mEnemy != null )
@@ -192,7 +192,7 @@ class Board extends JLayeredPane implements ActionListener {
             } catch (LineUnavailableException | IOException e) { e.printStackTrace(); }
         }
         void play(String identifier){
-            if ( identifier.equals("NAA") ){
+            if ( identifier.equals("NAE") ){
                 if ( enemyClip.isActive() )
                     enemyClip.stop();
                 enemyClip.setFramePosition(0);
@@ -221,11 +221,11 @@ class Board extends JLayeredPane implements ActionListener {
             grid[i][j] = null;
             tempSound.play("RR");
         }
-        if ( identifier.equals("NAA") ){
+        if ( identifier.equals("NAE") ){
             window.updateScoreTracker(-1);
             remove(grid[i][j]);
             grid[i][j] = null;
-            tempSound.play("NAA");
+            tempSound.play("NAE");
         }
         if ( identifier.equals("ME") ){
             if ( ++contact == 100 ){

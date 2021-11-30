@@ -17,7 +17,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("BoardSetupTest")
-    public void setupTest(){
+    public void constructorTest(){
         assert(!board.t.isRunning());
         assertNotNull(board.enemyStream);
         assertNotNull(board.rewardStream);

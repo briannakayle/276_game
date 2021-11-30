@@ -35,7 +35,7 @@ public class NonAnimatedEnemy extends RegularRewards implements ActionListener {
 
     @Override
     public String getIdentifier(){
-        return "NAA";
+        return "NAE";
     }
 
     @Override
