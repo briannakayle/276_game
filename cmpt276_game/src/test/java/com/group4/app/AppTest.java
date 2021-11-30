@@ -14,8 +14,8 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("SetupTest")
-    public void setupTest(){
+    @DisplayName("Setup Test")
+    public void constructorTest(){
         assertNotNull(window);
         assertNotNull(window.gettTracker());
         assertNotNull(window.getsTracker());
@@ -23,11 +23,25 @@ public class AppTest {
     }
 
     @Test
+    @DisplayName("ScoreTracker Test")
     public void updateScoreTrackerTest() {
         window.updateScoreTracker(100);
         assertEquals(100, window.getsTracker().getMarks());
         window.updateRealTracker(100);
         assertEquals(100, window.getsTracker().getMarks());
         assertEquals(100, window.getsTracker().getRealMarks());
+    }
+
+    @Test
+    @DisplayName("Integrated AppWindow and Board")
+    public void integratedWindowAndBoardTest(){
+        Board board = new Board(null,null,null,null,window);
+        boardHolder holder = new boardHolder(board);
+        window.addBoard(holder);
+        window.setBoard(holder);
+        assertNotNull(board.window);
+        assertNotNull(window.currentBoard);
+        assert(board.t.isRunning());
+
     }
 }
