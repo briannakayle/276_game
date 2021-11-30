@@ -8,7 +8,7 @@ import java.io.IOException;
 
 class AppWindow extends JFrame{
 
-    private Board currentBoard;
+    protected Board currentBoard;
     private boardHolder gameOverBoard;
     private boardHolder winBoard;
     private final File audioFile;
