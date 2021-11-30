@@ -13,7 +13,7 @@ public class BarrierTest {
  }
 
  @Test
- void positiontest() {
+ public void positionTest() {
   int x = 110;
   int y = 330;
   Barrier ba = new Barrier(x, y);
@@ -22,7 +22,7 @@ public class BarrierTest {
  }
 
  @Test
- public void drawtest() {
+ public void drawTest() {
   int x=0;int y=2;
   AppWindow window = new AppWindow();
   Board board1 = new Board(null,null,null,null,window);
