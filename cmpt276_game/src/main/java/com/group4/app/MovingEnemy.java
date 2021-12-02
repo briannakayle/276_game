@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MovingEnemy extends NonAnimatedEnemy{
-    private int drawX = 0; private int drawY = 0;
+    protected int drawX = 0; protected int drawY = 0;
     private int direction, noMove;
     public MovingEnemy(int x, int y) {
         super(x,y);
@@ -23,7 +23,7 @@ public class MovingEnemy extends NonAnimatedEnemy{
         adjust(64,32);
     }
 
-    private void adjust(int width, int height){
+    protected void adjust(int width, int height){
         collision.setSize(width, height);
         drawX = (64-width)/2;
         drawY = (64-height)/2;
@@ -56,7 +56,6 @@ public class MovingEnemy extends NonAnimatedEnemy{
     @Override
     public void actionPerformed(ActionEvent e) {
         direction = new Random().nextInt(4);
-
         if ( direction == 3 && noMove != 180 ) {
             setLocation(getX() - 10, getY());
             collision.setLocation(getX() - 10, getY());
