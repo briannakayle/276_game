@@ -38,6 +38,17 @@ public class BonusIntegrationTest {
   
 
  }
+    @Test
+    //check what would happen if the point want to draw at is not null
+    public void drawBonusFullTest(){
+        int x=2;int y=3;
+        AppWindow window = new AppWindow();
+        Board board1 = new Board(null,null,null,null,window);
+        board1.addBonus(2,3);
+        board1.addBonus(x, y);
+        
+        
+    }
     private boolean checkGridSpot(int x, int y) {
         return false;
     }
