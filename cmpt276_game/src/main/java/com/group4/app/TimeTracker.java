@@ -10,7 +10,7 @@ public class TimeTracker  implements ActionListener {
     private int seconds = 0;
 
     public TimeTracker(ActionListener listener) {
-        t = new Timer(1250,listener);
+        t = new Timer(1000,listener);
     }
 
     public int getSeconds(){
@@ -33,4 +33,5 @@ public class TimeTracker  implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         addSeconds();
     }
+
 }
