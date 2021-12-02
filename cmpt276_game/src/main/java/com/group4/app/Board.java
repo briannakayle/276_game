@@ -335,6 +335,10 @@ class Board extends JLayeredPane implements ActionListener {
             change(window.getWinBoard(),-1000000,-10000000);
             window.gameOver();
         }
+        if ( window.getsTracker().getMarks() < 0 ){
+            change(window.getGameOverBoard(),-1000000,-10000000);
+            window.gameOver();
+        }
         bonusTicker++;
         if ( bonusTicker >= 15000 ){
             removeBonus();
