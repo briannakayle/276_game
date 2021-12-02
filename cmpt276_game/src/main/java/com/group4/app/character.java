@@ -14,7 +14,7 @@ import java.io.IOException;
 class character extends baseElement implements ActionListener, KeyListener {
     private int noMove = -1;
     private int direction = -1;
-    private int drawX = 0; private int drawY = 0;
+    protected int drawX = 0; protected int drawY = 0;
 
     final private BufferedImage[] spritesLeft = new BufferedImage[2];
     final private BufferedImage[] spritesRight = new BufferedImage[2];
@@ -22,7 +22,7 @@ class character extends baseElement implements ActionListener, KeyListener {
     final private BufferedImage[] spritesDown = new BufferedImage[2];
     final private BufferedImage[][] sprites = new BufferedImage[][] { spritesLeft,spritesRight,spritesUp,spritesDown };
 
-    private final Timer t1;
+    protected Timer t1;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -49,7 +49,7 @@ class character extends baseElement implements ActionListener, KeyListener {
     }
 
     public class spriteAnimListener implements ActionListener{
-        private int animFrame = 0;
+        protected int animFrame = 0;
         public Timer t2;
 
         public spriteAnimListener(){
@@ -57,14 +57,14 @@ class character extends baseElement implements ActionListener, KeyListener {
             t2.start();
         }
 
-        private void adjust(int width, int height){
+        protected void adjust(int width, int height){
             //setSize(width,height);
             collision.setSize(width, height);
             drawX = (64-width)/2;
             drawY = (64-height)/2;
         }
 
-        private void animFrameUpdater(){
+        protected void animFrameUpdater(){
             if ( animFrame == 0 )
                 animFrame++;
             else {
