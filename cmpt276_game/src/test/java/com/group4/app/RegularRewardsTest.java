@@ -16,7 +16,7 @@ class RegularRewardsTest {
  }
 
  @Test
- void positiontest() {
+ public void positiontest() {
   int x = 110;
   int y = 330;
   RegularRewards regularRewards = new RegularRewards(x, y);
@@ -24,7 +24,7 @@ class RegularRewardsTest {
  }
 
  @Test
- public void drawtest() {
+ public void drawTest() {
   int x=0;int y=2;
   AppWindow window = new AppWindow();
   Board board1 = new Board(null,null,null,null,window);
