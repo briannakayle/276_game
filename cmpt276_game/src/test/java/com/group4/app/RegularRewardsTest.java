@@ -11,6 +11,7 @@ public class RegularRewardsTest {
         int y = 330;
         RegularRewards regularRewards = new RegularRewards(x, y);
         assertEquals(x, regularRewards.getX());
+        assertEquals(y, regularRewards.getY());
     }
 
     @Test
