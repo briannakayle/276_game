@@ -55,16 +55,13 @@ public class MovingEnemyTest {
     public void testActionPerformed(){
         ActionEvent e = new ActionEvent(enemy.t, 0, null);
 
-        //check direction and noMove conditionals
         int x1 = enemy.getX();
         int y1 = enemy.getY();
         enemy.setNoMove(-1);
-        //enemy.t.stop();
         enemy.actionPerformed(e);
         assertTrue(enemy.getX() !=x1 || enemy.getY() != y1);
 
-        //if fc==0
-        enemy.frameCount =0;
+        enemy.frameCount = 0;
         enemy.actionPerformed(e);
         enemy.t.stop();
         assertEquals(1, enemy.frameCount);
