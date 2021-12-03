@@ -16,21 +16,14 @@ public class NonAnimatedEnemyTest {
     }
 
     @Test
-    public void shouldChangeFrameCount(){
-        int fc = na_enemy.frameCount;
-        na_enemy.frameCount++;
-        assertEquals(fc+1, na_enemy.frameCount);
-    }
-
-    @Test
     public void testActionPerformed(){
         ActionEvent e = new ActionEvent(na_enemy.t, 0, null );
-        //if fc==0
+        
         na_enemy.frameCount =0;
         na_enemy.actionPerformed(e);
         na_enemy.t.stop();
         assertEquals(1, na_enemy.frameCount);
-        //else
+       
         na_enemy.frameCount = 1;
         int fc_prev = na_enemy.frameCount;
         na_enemy.actionPerformed(e);
