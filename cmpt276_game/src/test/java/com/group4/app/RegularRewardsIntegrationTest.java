@@ -1,15 +1,12 @@
 package com.group4.app;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-
-
-
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RegularRewardsIntegrationTest {
-  
     @Test
-    //test  whether adding rewards mark succeed (1 points for regularrewards)
+    @DisplayName("test  whether adding rewards mark succeed (1 points for RegularRewards)")
     public void addRewardsMarkTest(){
         ScoreTrackerView scoreTrackerView = new ScoreTrackerView();
         ScoreTracker scoreTracker = new ScoreTracker();
@@ -21,8 +18,7 @@ public class RegularRewardsIntegrationTest {
 
     }
     @Test
-    //test addRegularRewards method
-    
+    @DisplayName("test addRegularRewards method")
     public void drawRewardTest() {
         int x=2;int y=3;
         AppWindow window = new AppWindow();
@@ -39,15 +35,13 @@ public class RegularRewardsIntegrationTest {
     
  }
     @Test
-    //check what is print out if the point want to draw at is not null
+    @DisplayName("check what is print out if the point want to draw at is not null")
     public void drawRewardsFullTest(){
         int x=2;int y=3;
         AppWindow window = new AppWindow();
         Board board1 = new Board(null,null,null,null,window);
         board1.addRegularRewards(2,3);
         board1.addRegularRewards(x, y);
-     
-     
  }
     private boolean checkGridSpot(int x, int y) {
         return false;

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import org.junit.Test;
 
 public class MovingEnemyTest {
+
     MovingEnemy enemy = new MovingEnemy(0,0);
     @Test
     public void shouldCreateMovingEnemy(){

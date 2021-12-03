@@ -1,7 +1,6 @@
 package com.group4.app;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
 
 public class TimeTrackerIntegrationTest {

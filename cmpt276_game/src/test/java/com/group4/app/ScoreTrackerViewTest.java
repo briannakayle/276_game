@@ -1,14 +1,14 @@
 package com.group4.app;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreTrackerViewTest{
 
     @Test
-    //test for initialize
-    public void ScoreTrackerViewTest(){
+    @DisplayName("test for initialize")
+    public void viewTest(){
         ScoreTrackerView sTracker = new ScoreTrackerView();
         //check location
         assertEquals(100, sTracker.getHolder().getX());

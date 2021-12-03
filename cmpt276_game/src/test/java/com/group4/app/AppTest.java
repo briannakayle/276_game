@@ -2,7 +2,6 @@ package com.group4.app;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.DisplayName;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest {

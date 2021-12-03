@@ -1,13 +1,9 @@
 package com.group4.app;
 
 import org.junit.Test;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class characterTest {
     character _character = new character();
@@ -28,7 +24,7 @@ public class characterTest {
     public void testKeyReleased() {
         KeyEvent e = new KeyEvent(_character, KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0, KeyEvent.VK_UNDEFINED, KeyEvent.CHAR_UNDEFINED);
         _character.keyReleased(e);
-        assertTrue(_character.getDirection() == -1);
+        assertEquals(-1, _character.getDirection());
     }
 
     @Test

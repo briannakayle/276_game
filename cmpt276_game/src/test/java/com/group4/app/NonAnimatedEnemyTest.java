@@ -1,8 +1,8 @@
 package com.group4.app;
 
-import org.junit.Test;
 import java.awt.event.ActionEvent;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NonAnimatedEnemyTest {
     NonAnimatedEnemy na_enemy = new NonAnimatedEnemy(0,0);

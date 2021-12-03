@@ -117,7 +117,7 @@ class Board extends JLayeredPane implements ActionListener {
         }
     }
 
-    private boolean checkGridSpot(int x, int y){
+    public boolean checkGridSpot(int x, int y){
         return grid[x][y] == null;
     }
 
