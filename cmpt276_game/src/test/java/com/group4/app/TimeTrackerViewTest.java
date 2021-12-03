@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TimeTrackerViewTest {
 
     @Test
-    public void TimeTrackerViewTest(){
+    public void ViewTest(){
 
         TimeTrackerView tTracker = new TimeTrackerView();
         TimeTracker timeTracker = new TimeTracker(null);

@@ -17,8 +17,7 @@ public class BarrierTest {
     @Test
     public void drawTest() {
         int x=0;int y=2;
-        AppWindow window = new AppWindow();
-        Board board1 = new Board(null,null,null,null,window);
+        Board board1 = new Board(null,null,null,null,null);
         board1.addBarrier(x,y);
     }
 }
