@@ -10,11 +10,7 @@ public class AppTest {
     @BeforeAll
     static void setup(){
         window = new AppWindow();
-    }
-
-    @AfterEach
-    void cleanup(){
-        window = new AppWindow();
+        window.setVisible(false);
     }
 
 
@@ -61,8 +57,8 @@ public class AppTest {
         board1.addRegularRewards(0,0);
         board1.addNonAnimatedEnemy(0,1);
         board1.collectPoint(0,0,"RR");
-        assert(window.getsTracker().getMarks() == 1);
+        assert(window.getsTracker().getMarks() == 101);
         board1.collectPoint(0,1,"NAE");
-        assert(window.getsTracker().getMarks() == 0);
+        assert(window.getsTracker().getMarks() == 100);
     }
 }

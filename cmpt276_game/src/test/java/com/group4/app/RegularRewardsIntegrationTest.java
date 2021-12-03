@@ -21,8 +21,7 @@ public class RegularRewardsIntegrationTest {
     @DisplayName("test addRegularRewards method")
     public void drawRewardTest() {
         int x=2;int y=3;
-        AppWindow window = new AppWindow();
-        Board board1 = new Board(null,null,null,null,window);
+        Board board1 = new Board(null,null,null,null,null);
         board1.addRegularRewards(x,y);
         //check whether the point is null after drawing 
         if(checkGridSpot(x,y)){
@@ -38,8 +37,7 @@ public class RegularRewardsIntegrationTest {
     @DisplayName("check what is print out if the point want to draw at is not null")
     public void drawRewardsFullTest(){
         int x=2;int y=3;
-        AppWindow window = new AppWindow();
-        Board board1 = new Board(null,null,null,null,window);
+        Board board1 = new Board(null,null,null,null,null);
         board1.addRegularRewards(2,3);
         board1.addRegularRewards(x, y);
  }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.TimeUnit;
 
 public class TimeTrackerIntegrationTest {
+
     Board currentBoard;
     AppWindow window = new AppWindow();
     Board board1 = new Board(null,null,null,null,window);
@@ -11,6 +12,7 @@ public class TimeTrackerIntegrationTest {
 
     @Test
     public void TimeTrackerTest() throws InterruptedException {
+        window.setVisible(false);
         currentBoard = holder1.getHeld();
         currentBoard.startTimer();
         TimeUnit.SECONDS.sleep(5);

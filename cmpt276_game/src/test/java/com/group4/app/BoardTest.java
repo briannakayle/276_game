@@ -11,6 +11,7 @@ public class BoardTest {
     @BeforeAll
     static void setup(){
         board = new Board(null,null,null,null,null);
+        holder = new boardHolder(board);
     }
 
     @Test
@@ -37,9 +38,14 @@ public class BoardTest {
 
     @Test
     public void collectTest(){
+        board.window = new AppWindow();
+        board.window.setVisible(false);
+        board.window.setBoard(holder);
         board.addRegularRewards(1,1);
         board.collectPoint(1,1,"RR");
         assertNull(board.grid[1][1]);
+        //Cleanup
+        board.window.dispose();
     }
 
     @Test

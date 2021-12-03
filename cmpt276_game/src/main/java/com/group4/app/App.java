@@ -12,6 +12,7 @@ class AppWindow extends JFrame{
     private boardHolder gameOverBoard;
     private boardHolder winBoard;
     private final File audioFile;
+    private Clip music;
     private final ScoreTrackerView sTracker;
     private final TimeTrackerView tTracker;
 
@@ -67,6 +68,10 @@ class AppWindow extends JFrame{
         this.winBoard = winBoard;
     }
 
+    public void startMusic(){
+        music.start();
+    }
+
     public AppWindow() {
         JPanel content = new JPanel();
         setContentPane(content);
@@ -83,9 +88,8 @@ class AppWindow extends JFrame{
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
             AudioFormat format = audioStream.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format);
-            Clip music = (Clip) AudioSystem.getLine(info);
+            music = (Clip) AudioSystem.getLine(info);
             music.open(audioStream);
-            music.start();
         }   catch ( UnsupportedAudioFileException e ){ System.out.println("unsupported audio file for background music"); }
             catch ( IOException e ) { System.out.println("IOException"); }
             catch ( LineUnavailableException e ) { System.out.println("line unavailable"); }
@@ -100,6 +104,7 @@ class AppWindow extends JFrame{
         } catch (IOException | FontFormatException e) { System.out.println("Could not find specified font"); }
 
         AppWindow window = new AppWindow();
+        window.startMusic();
 
         character Player = new character();
 
