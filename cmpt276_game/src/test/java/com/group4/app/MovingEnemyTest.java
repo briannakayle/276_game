@@ -45,13 +45,6 @@ public class MovingEnemyTest {
     }
 
     @Test
-    public void shouldChangeFrameCount(){
-        int fc = enemy.frameCount;
-        enemy.frameCount++;
-        assertEquals(fc+1, enemy.frameCount);
-    }
-
-    @Test
     public void testActionPerformed(){
         ActionEvent e = new ActionEvent(enemy.t, 0, null);
 
