@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 class ScoreTrackerView extends tracker {
+
+    /**
+     * ScoreTrackerView handles the visual aspect of the Score. Split from ScoreTracker for ease of testing.
+     */
+
     ScoreTracker scoreTracker = new ScoreTracker();
 
     public ScoreTrackerView() {

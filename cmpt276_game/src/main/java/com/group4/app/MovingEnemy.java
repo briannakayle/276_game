@@ -9,6 +9,12 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MovingEnemy extends NonAnimatedEnemy{
+
+    /**
+     * A moving enemy that will end the game when touched by the player. Since its hit-box is finicky,
+     * the player needs to remain in contact with one for 100ms.
+     */
+
     protected int drawX = 0; protected int drawY = 0;
     private int direction, noMove;
     public MovingEnemy(int x, int y) {

@@ -8,6 +8,11 @@ import java.io.IOException;
 
 class AppWindow extends JFrame{
 
+    /**
+     * Class that sets the display and swaps in between different boards, via <i>currentBoard</i>
+     * and <i>setBoard</i>. It also plays the background music.
+     */
+
     protected Board currentBoard;
     private boardHolder gameOverBoard;
     private boardHolder winBoard;

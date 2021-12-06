@@ -7,6 +7,11 @@ import java.io.IOException;
 
 class RegularRewards extends baseElement{
 
+    /**
+     * The main points that are found scattered across the maze, that increment the player's Marks and realMarks
+     * by 1. The player must collect all 17 to win the game.
+     */
+
     public RegularRewards(int x, int y){
         setSize(64,64);
         setLocation(x,y);

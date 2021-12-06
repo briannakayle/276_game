@@ -6,6 +6,11 @@ import java.io.File;
 import java.io.IOException;
 
 class tracker{
+
+    /**
+     * The parent class for either tracker. Sets a common font and point size to be used between the two.
+     */
+
     protected final JPanel holder;
     protected JLabel display;
     protected Font customFont;

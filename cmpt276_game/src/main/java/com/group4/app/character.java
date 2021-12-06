@@ -12,6 +12,12 @@ import java.io.File;
 import java.io.IOException;
 
 class character extends baseElement implements ActionListener, KeyListener {
+
+    /**
+     * Character is the Playable Character in this game. This class handles movement, has a timer to read input,
+     * and a nested class to handle its animation on its own timer and methods.
+     */
+
     private int noMove = -1;
     private int direction = -1;
     protected int drawX = 0; protected int drawY = 0;

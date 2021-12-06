@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class TimeTrackerView extends tracker implements ActionListener {
+
+    /**
+     * The visual aspect of TimeTracker. Split from TimeTracker for ease of testing.
+     */
+
     TimeTracker timeTracker;
 
     public TimeTrackerView(){

@@ -10,6 +10,13 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class NonAnimatedEnemy extends RegularRewards implements ActionListener {
+
+    /**
+     * The stationary enemy that subtracts 1 point from the player when touched. Swaps between 2 sprites
+     * as an idle animation. Inherits from Regular Rewards in order to implement the framework of scoring,
+     * and has a score value of -1.
+     */
+
     final protected BufferedImage[] sprites = new BufferedImage[2];
     protected int frameCount = 0;
     protected Timer t;

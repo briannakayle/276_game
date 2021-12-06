@@ -4,7 +4,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TimeTracker  implements ActionListener {
+public class TimeTracker implements ActionListener {
+
+    /**
+     * TimeTracker handles the timer on the top right of the screen. Freezes when the player has either lost
+     * or won the game to show how long it took them.
+     */
 
     private final Timer t;
     private int seconds = 0;

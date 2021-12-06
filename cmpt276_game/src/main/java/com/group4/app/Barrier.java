@@ -7,6 +7,10 @@ import java.io.IOException;
 
 class Barrier extends baseElement{
 
+    /**
+     *Basic Barrier that obstructs the player, to be used to set mazes within the maze.
+     */
+
     public Barrier(int x, int y){
         setSize(64,64);
         setLocation(x,y);

@@ -6,6 +6,12 @@ import java.io.File;
 import java.io.IOException;
 
 class slotComponent extends baseElement{
+
+    /**
+     * Components that fit into each of the 4 empty spots on the Board: Top, Left, Bottom, and Right.
+     * Can either be a wall or a door leading to another Board.
+     */
+
     private final String type;
     private final String position;
     int wall_x = 0; int wall_y = 0; int door_x = 0; int door_y = 0;

@@ -12,6 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 class Board extends JLayeredPane implements ActionListener {
+
+    /**
+     * Board that holds all the elements of the game. Each Board has its own layout on a 12x7 grid
+     * that determines the locations of all the objects on screen, except for the player since it can
+     * be between grid positions. Moving Enemy is included since it needs a starting point, so that on
+     * initialization we don't crowd the same spot. Each Board has its own timer to check collisions between
+     * its elements and the player/Moving Enemy, as well as to remove its bonus and to move the Moving Enemy
+     * around. Boards are also responsible for playing audio from collision events.
+     */
+
     protected boardHolder up, down, left, right, Holder;
     protected BufferedImage BaseBoard;
     protected AppWindow window;
