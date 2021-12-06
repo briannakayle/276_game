@@ -20,7 +20,7 @@ public class AppTest {
         assertNotNull(window);
         assertNotNull(window.gettTracker());
         assertNotNull(window.getsTracker());
-        assertNotNull(window.getAudioFile());
+        //assertNotNull(window.getAudioFile());
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.group4.app;
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,7 +17,6 @@ class AppWindow extends JFrame{
     protected Board currentBoard;
     private boardHolder gameOverBoard;
     private boardHolder winBoard;
-    private final File audioFile;
     private Clip music;
     private final ScoreTrackerView sTracker;
     private final TimeTrackerView tTracker;
@@ -57,10 +57,6 @@ class AppWindow extends JFrame{
         return winBoard;
     }
 
-    public File getAudioFile(){
-        return audioFile;
-    }
-
     public void gameOver(){
         tTracker.stopTimer();
     }
@@ -88,9 +84,8 @@ class AppWindow extends JFrame{
         add(sTracker.getHolder());
         tTracker = new TimeTrackerView();
         add(tTracker.getHolder());
-        audioFile = new File("src/main/resources/music.wav");
         try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/music.wav")));
             AudioFormat format = audioStream.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format);
             music = (Clip) AudioSystem.getLine(info);
@@ -100,10 +95,10 @@ class AppWindow extends JFrame{
             catch ( LineUnavailableException e ) { System.out.println("line unavailable"); }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Font customFont = null;
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/font.ttf")).deriveFont(128f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, AppWindow.class.getResourceAsStream("/font.ttf")).deriveFont(128f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
         } catch (IOException | FontFormatException e) { System.out.println("Could not find specified font"); }

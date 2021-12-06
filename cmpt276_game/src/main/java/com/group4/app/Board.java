@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ class Board extends JLayeredPane implements ActionListener {
     public Board(boardHolder setUp, boardHolder setDown, boardHolder setRight, boardHolder setLeft, AppWindow setWindow){
         up = setUp; down = setDown; right = setRight; left = setLeft; window = setWindow;
         try {
-            BaseBoard = ImageIO.read(new File("src/main/resources/BaseBoardFloor.PNG"));
+            BaseBoard = ImageIO.read((getClass().getResourceAsStream("/BaseBoardFloor.png")));
         } catch(IOException e){ System.out.println("Walls/floor Sprite source not found"); }
         setSize(1024,880);
         setWallBounds();
@@ -71,8 +72,8 @@ class Board extends JLayeredPane implements ActionListener {
         setFocusable(false);
         t = new Timer(1, this);
         try {
-            rewardStream = AudioSystem.getAudioInputStream(new File("src/main/resources/rupee.wav"));
-            enemyStream = AudioSystem.getAudioInputStream(new File("src/main/resources/enemy.wav"));
+            rewardStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/rupee.wav")));
+            enemyStream = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/enemy.wav")));
 
             AudioFormat rewardFormat = rewardStream.getFormat();
             AudioFormat enemyFormat = enemyStream.getFormat();

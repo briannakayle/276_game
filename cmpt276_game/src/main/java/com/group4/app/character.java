@@ -141,14 +141,14 @@ class character extends baseElement implements ActionListener, KeyListener {
 
     private void readSprites() {
         try {
-            sprites[0][0] = ImageIO.read(new File("src/main/resources/LinkL1.PNG"));
-            sprites[0][1] = ImageIO.read(new File("src/main/resources/LinkL2.PNG"));
-            sprites[1][0] = ImageIO.read(new File("src/main/resources/LinkR1.PNG"));
-            sprites[1][1] = ImageIO.read(new File("src/main/resources/LinkR2.PNG"));
-            sprites[2][0] = ImageIO.read(new File("src/main/resources/LinkU1.PNG"));
-            sprites[2][1] = ImageIO.read(new File("src/main/resources/LinkU2.PNG"));
-            sprites[3][0] = ImageIO.read(new File("src/main/resources/LinkD1.PNG"));
-            sprites[3][1] = ImageIO.read(new File("src/main/resources/LinkD2.PNG"));
+            sprites[0][0] = ImageIO.read((getClass().getResourceAsStream("/LinkL1.png")));
+            sprites[0][1] = ImageIO.read((getClass().getResourceAsStream("/LinkL2.png")));
+            sprites[1][0] = ImageIO.read((getClass().getResourceAsStream("/LinkR1.png")));
+            sprites[1][1] = ImageIO.read((getClass().getResourceAsStream("/LinkR2.png")));
+            sprites[2][0] = ImageIO.read((getClass().getResourceAsStream("/LinkU1.png")));
+            sprites[2][1] = ImageIO.read((getClass().getResourceAsStream("/LinkU2.png")));
+            sprites[3][0] = ImageIO.read((getClass().getResourceAsStream("/LinkD1.png")));
+            sprites[3][1] = ImageIO.read((getClass().getResourceAsStream("/LinkD2.png")));
             image = sprites[3][0];
         } catch(IOException e){ System.out.println("Character Sprite source not found"); }
     }

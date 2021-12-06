@@ -15,7 +15,7 @@ public class Bonus extends RegularRewards{
     public Bonus(int x, int y) {
         super(x, y);
         try {
-            image = ImageIO.read(new File("src/main/resources/bonus.PNG"));
+            image = ImageIO.read((getClass().getResourceAsStream("/bonus.png")));
         }catch (IOException e) { System.out.println("Bonus Sprite not found"); }
 
     }

@@ -1,9 +1,12 @@
 package com.group4.app;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 class Barrier extends baseElement{
 
@@ -15,7 +18,7 @@ class Barrier extends baseElement{
         setSize(64,64);
         setLocation(x,y);
         try{
-            image = ImageIO.read(new File("src/main/resources/obstacle.PNG"));
+            image = ImageIO.read((getClass().getResourceAsStream("/obstacle.png")));
         }catch(IOException e){ System.out.println("Barrier Sprite not found"); }
         collision = new collisionBox(getX()+7,getY()+7,50,50);
         repaint();

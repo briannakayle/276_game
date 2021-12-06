@@ -17,7 +17,7 @@ public class characterTest {
     @Test
     public void shouldGetDirection() {
         int _direction = _character.getDirection();
-        assertTrue(_direction >= -1 && _direction <= 270);
+        assert(_direction >= -1 && _direction <= 270);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class characterTest {
         _character.keyPressed(l);
         _character.t1.stop();
         _character.actionPerformed(e);
-        assertTrue(_character.getLocation().x == x-10 && _character.getLocation().y == y);
+        assert(_character.getLocation().x == x-10 && _character.getLocation().y == y);
     }
 
     @Test

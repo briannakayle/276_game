@@ -23,11 +23,11 @@ class slotComponent extends baseElement{
                 wall_x = 0; wall_y = 464;
                 door_x = 64; door_y = 464;
                 if ( comp.equals("wall") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotWallLeft.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotWallLeft.png")));
                     collision = new collisionBox(wall_x+64,wall_y,64,64);
                 }
                 if ( comp.equals("door") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotDoorLeft.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotDoorLeft.png")));
                     collision = new collisionBox(door_x,door_y,6,64);
                 }
             }
@@ -35,11 +35,11 @@ class slotComponent extends baseElement{
                 wall_x = 896; wall_y = 464;
                 door_x = 967; door_y = 464;
                 if ( comp.equals("wall") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotWallRight.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotWallRight.png")));
                     collision = new collisionBox(wall_x,wall_y,64,64);
                 }
                 if ( comp.equals("door") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotDoorRight.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotDoorRight.png")));
                     collision = new collisionBox(door_x,door_y,6,64);
                 }
             }
@@ -47,11 +47,11 @@ class slotComponent extends baseElement{
                 wall_x = 448; wall_y = 176;
                 door_x = 447; door_y = 239;
                 if ( comp.equals("wall") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotWallTop.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotWallTop.png")));
                     collision = new collisionBox(wall_x,wall_y+64,64,64);
                 }
                 if ( comp.equals("door") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotDoorTop.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotDoorTop.png")));
                     collision = new collisionBox(door_x,door_y,64,6);
                 }
             }
@@ -59,11 +59,11 @@ class slotComponent extends baseElement{
                 wall_x = 448; wall_y = 752;
                 door_x = 448; door_y = 827;
                 if ( comp.equals("wall") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotWallBottom.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotWallBottom.png")));
                     collision = new collisionBox(wall_x,wall_y,64,64);
                 }
                 if ( comp.equals("door") ) {
-                    image = ImageIO.read(new File("src/main/resources/slotDoorBottom.PNG"));
+                    image = ImageIO.read((getClass().getResourceAsStream("/slotDoorBottom.png")));
                     collision = new collisionBox(door_x,door_y,64,6);
                 }
             }

@@ -1,9 +1,11 @@
 package com.group4.app;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 
 class tracker{
 
@@ -18,9 +20,8 @@ class tracker{
         holder = new JPanel();
         display = new JLabel("",SwingConstants.LEFT);
         display.setForeground(Color.white);
-
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/font.ttf")).deriveFont(48f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/font.ttf")).deriveFont(48f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
         } catch (IOException | FontFormatException e) { System.out.println("Could not find specified font"); }

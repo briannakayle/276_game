@@ -22,8 +22,8 @@ public class MovingEnemy extends NonAnimatedEnemy{
         t.stop();
         t = new Timer(100,this);
         try{
-            sprites[0] = ImageIO.read(new File("src/main/resources/bat1.PNG"));
-            sprites[1] = ImageIO.read(new File("src/main/resources/bat2.PNG"));
+            sprites[0] = ImageIO.read((getClass().getResourceAsStream("/bat1.png")));
+            sprites[1] = ImageIO.read((getClass().getResourceAsStream("/bat2.png")));
             image = sprites[0];
         }catch(IOException e){ System.out.println("AnimatedEnemy Sprite not found"); }
         adjust(64,32);

@@ -27,8 +27,8 @@ public class NonAnimatedEnemy extends RegularRewards implements ActionListener {
         setSize(64,64);
         setLocation(x,y);
         try{
-            sprites[0] = ImageIO.read(new File("src/main/resources/stalfos1.PNG"));
-            sprites[1] = ImageIO.read(new File("src/main/resources/stalfos2.PNG"));
+            sprites[0] = ImageIO.read((getClass().getResourceAsStream("/stalfos1.png")));
+            sprites[1] = ImageIO.read((getClass().getResourceAsStream("/stalfos2.png")));
             image = sprites[0];
         }catch(IOException e){ System.out.println("NonAnimatedEnemy Sprite not found"); }
         collision = new collisionBox(getX()+27,getY()+27,10,10);

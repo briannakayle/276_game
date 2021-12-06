@@ -16,7 +16,7 @@ class RegularRewards extends baseElement{
         setSize(64,64);
         setLocation(x,y);
         try {
-            image = ImageIO.read(new File("src/main/resources/point.PNG"));
+            image = ImageIO.read((getClass().getResourceAsStream("/point.png")));
         } catch(IOException e){ System.out.println("Point Sprite source not found"); }
         collision = new collisionBox(getX()+16,getY(),32,64);
         setDoubleBuffered(true);
