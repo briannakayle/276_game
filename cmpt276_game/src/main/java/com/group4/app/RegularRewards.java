@@ -2,10 +2,9 @@ package com.group4.app;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
-class RegularRewards extends baseElement{
+class RegularRewards extends Collectible{
 
     /**
      * The main points that are found scattered across the maze, that increment the player's Marks and realMarks
@@ -13,16 +12,10 @@ class RegularRewards extends baseElement{
      */
 
     public RegularRewards(int x, int y){
-        setSize(64,64);
-        setLocation(x,y);
+        super(x, y);
         try {
             image = ImageIO.read((getClass().getResourceAsStream("/point.png")));
         } catch(IOException e){ System.out.println("Point Sprite source not found"); }
-        collision = new collisionBox(getX()+16,getY(),32,64);
-        setDoubleBuffered(true);
-    }
-
-    RegularRewards() {
     }
 
     @Override
@@ -31,6 +24,7 @@ class RegularRewards extends baseElement{
         g.drawImage(image, 16, 0, this);
     }
 
+    @Override
     public String getIdentifier() {
         return "RR";
     }

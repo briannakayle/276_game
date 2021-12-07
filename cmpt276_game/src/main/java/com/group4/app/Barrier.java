@@ -1,12 +1,8 @@
 package com.group4.app;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 class Barrier extends baseElement{
 

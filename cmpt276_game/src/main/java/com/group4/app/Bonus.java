@@ -1,10 +1,10 @@
 package com.group4.app;
 
 import javax.imageio.ImageIO;
-import java.io.File;
+import java.awt.*;
 import java.io.IOException;
 
-public class Bonus extends RegularRewards{
+public class Bonus extends Collectible{
 
     /**
      * Bonus point that gives the player 3 points. These 3 points do not go towards
@@ -18,6 +18,12 @@ public class Bonus extends RegularRewards{
             image = ImageIO.read((getClass().getResourceAsStream("/bonus.png")));
         }catch (IOException e) { System.out.println("Bonus Sprite not found"); }
 
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(image, 16, 0, this);
     }
 
     @Override

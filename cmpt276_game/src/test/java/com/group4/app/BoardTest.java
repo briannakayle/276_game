@@ -6,12 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
     private static Board board;
-    private static boardHolder holder;
 
     @BeforeAll
     static void setup(){
-        board = new Board(null,null,null,null,null);
-        holder = new boardHolder(board);
+        board = new Board(null);
     }
 
     @Test
@@ -40,7 +38,6 @@ public class BoardTest {
     public void collectTest(){
         board.window = new AppWindow();
         board.window.setVisible(false);
-        board.window.setBoard(holder);
         board.addRegularRewards(1,1);
         board.collectPoint(1,1,"RR");
         assertNull(board.grid[1][1]);

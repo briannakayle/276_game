@@ -6,7 +6,7 @@ class collisionBox extends Rectangle {
 
     /**
      * A simple Rectangle wrapper class meant to utilize its functionality and also
-     * eliminate any confusion about its purpose with a rename.
+     * eliminate confusion about its purpose with a rename.
      */
 
     public collisionBox(int x, int y, int width, int height){

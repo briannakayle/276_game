@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ class Board extends JLayeredPane implements ActionListener {
      * around. Boards are also responsible for playing audio from collision events.
      */
 
-    protected boardHolder up, down, left, right, Holder;
+    protected Board up, down, left, right;
     protected BufferedImage BaseBoard;
     protected AppWindow window;
     protected int bonusTicker = 0;
@@ -60,8 +59,8 @@ class Board extends JLayeredPane implements ActionListener {
         baseCollisionBoxes[7] = new collisionBox(1,593,128,160);    //left bottom vert
     }
 
-    public Board(boardHolder setUp, boardHolder setDown, boardHolder setRight, boardHolder setLeft, AppWindow setWindow){
-        up = setUp; down = setDown; right = setRight; left = setLeft; window = setWindow;
+    public Board(AppWindow setWindow){
+        window = setWindow;
         try {
             BaseBoard = ImageIO.read((getClass().getResourceAsStream("/BaseBoardFloor.png")));
         } catch(IOException e){ System.out.println("Walls/floor Sprite source not found"); }
@@ -89,26 +88,22 @@ class Board extends JLayeredPane implements ActionListener {
         tempSound = new soundPlayer();
     }
 
-    public void setUp(boardHolder up){
+    public void setUp(Board up){
         this.up = up;
     }
-    public void setDown(boardHolder down){
+    public void setDown(Board down){
         this.down = down;
     }
-    public void setRight(boardHolder right){
+    public void setRight(Board right){
         this.right = right;
     }
-    public void setLeft(boardHolder left){
+    public void setLeft(Board left){
         this.left = left;
     }
 
     public void addPlayer(character target){
         add(target,0);
         player = target;
-    }
-
-    public void setHolder(boardHolder target){
-        Holder = target;
     }
 
     public void stopTimer(){
@@ -180,19 +175,9 @@ class Board extends JLayeredPane implements ActionListener {
         else System.out.println("Grid spot already occupied");
     }
 
-    protected void change(boardHolder Dir, int x, int y){
-        if ( mEnemy != null )
-            mEnemy.stopTimer();
-        if ( Dir.getHeld().mEnemy != null )
-            Dir.getHeld().mEnemy.startTimer();
+    protected void removePlayer(){
         remove(player);
-        window.remove(Holder);
-        window.addBoard(Dir);
-        window.setBoard(Dir);
-        Dir.getHeld().addPlayer(player);
-        player.setLocation(x,y);
-        player.refresh();
-        Dir.repaint();
+        player = null;
     }
 
     private class soundPlayer{
@@ -241,7 +226,7 @@ class Board extends JLayeredPane implements ActionListener {
         if ( identifier.equals("ME") ){
             if ( ++contact == 100 ){
                 tempSound.play("NAA");
-                change(window.getGameOverBoard(),-1000000,-10000000);
+                window.changeBoard(window.getGameOverBoard(),-1000000,-10000000);
                 window.gameOver();
             }
         }
@@ -288,8 +273,9 @@ class Board extends JLayeredPane implements ActionListener {
     }
 
     protected int checkPlayerCollision(){
-        RegularRewards test1 = null;
-        NonAnimatedEnemy test2 = null;
+        /*What this does is return an integer value that's unique to the type of
+         * check that is being performed, to be used in ActionPerformed */
+        Collectible test1;
         collisionBox playerProjectedBox = new collisionBox(player.getX(),player.getY(),64,64);
 
         int pX = (int)playerProjectedBox.getX();
@@ -315,13 +301,13 @@ class Board extends JLayeredPane implements ActionListener {
                     if (slots.get(i).getType().equals("door")) {
                         t.stop();
                         if (slots.get(i).getPosition().equals("top"))
-                            change(up, 490, 700);
+                            window.changeBoard(up, 490, 700);
                         if (slots.get(i).getPosition().equals("bottom"))
-                            change(down, 490, 285);
+                            window.changeBoard(down, 490, 285);
                         if (slots.get(i).getPosition().equals("right"))
-                            change(right, 100, 495);
+                            window.changeBoard(right, 100, 495);
                         if (slots.get(i).getPosition().equals("left"))
-                            change(left, 855, 495);
+                            window.changeBoard(left, 855, 495);
                     } else
                         return (i + 1) * 10;
                 }
@@ -332,7 +318,7 @@ class Board extends JLayeredPane implements ActionListener {
                 if ( grid[i][j] != null ) {
                     if (playerProjectedBox.intersects(grid[i][j].getCollision()))
                         try {
-                            test1 = (RegularRewards)grid[i][j];
+                            test1 = (Collectible)grid[i][j];
                             collectPoint(i,j,test1.getIdentifier());
                         }catch(ClassCastException e1){ return player.getDirection() + 15; }
                 }
@@ -343,11 +329,11 @@ class Board extends JLayeredPane implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if ( window.getsTracker().getRealMarks() == 17 ){
-            change(window.getWinBoard(),-1000000,-10000000);
+            window.changeBoard(window.getWinBoard(),-1000000,-10000000);
             window.gameOver();
         }
         if ( window.getsTracker().getMarks() < 0 ){
-            change(window.getGameOverBoard(),-1000000,-10000000);
+            window.changeBoard(window.getGameOverBoard(),-1000000,-10000000);
             window.gameOver();
         }
         bonusTicker++;
@@ -423,7 +409,7 @@ class Board extends JLayeredPane implements ActionListener {
                     player.setNoMove(180);
                 }
             } else
-                player.setNoMove(-1);
+                if ( player != null ) player.setNoMove(-1);
         }
         if ( mEnemy != null ) {
             int colDir = checkMEnemyCollision();

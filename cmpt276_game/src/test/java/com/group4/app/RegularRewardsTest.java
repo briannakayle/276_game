@@ -17,7 +17,7 @@ public class RegularRewardsTest {
     @Test
     public void drawTest() {
         int x=0;int y=2;
-        Board board1 = new Board(null,null,null,null,null);
+        Board board1 = new Board(null);
         board1.addRegularRewards(x,y);
     }
 }

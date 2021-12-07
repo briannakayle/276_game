@@ -36,23 +36,22 @@ public class AppTest {
     @Test
     @DisplayName("Integrated AppWindow and Board")
     public void integratedWindowAndBoardTest(){
-        Board board1 = new Board(null,null,null,null,window);
-        boardHolder holder1 = new boardHolder(board1);
-        Board board2 = new Board(holder1,null,null,null,window);
-        boardHolder holder2 = new boardHolder(board2);
-        board1.setDown(holder2);
+        Board board1 = new Board(window);
+        Board board2 = new Board(window);
+        board1.setDown(board2);
+        board2.setUp(board1);
         board1.addPlayer(new character());
-        window.addBoard(holder1);
-        window.setBoard(holder1);
+        window.addBoard(board1);
+        window.setBoard(board1);
         assertNotNull(board1.window);
         assertNotNull(board2.window);
         assertNotNull(window.currentBoard);
         assert(board1.t.isRunning());
-        board1.change(holder2,0,0);
+        window.changeBoard(board2,0,0);
         assert(!board1.t.isRunning());
         assert(board2.t.isRunning());
         assertEquals(window.currentBoard, board2);
-        board2.change(holder1,0,0);
+        window.changeBoard(board1,0,0);
         assertEquals(window.currentBoard, board1);
         board1.addRegularRewards(0,0);
         board1.addNonAnimatedEnemy(0,1);

@@ -5,11 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
 
-public class NonAnimatedEnemy extends RegularRewards implements ActionListener {
+public class NonAnimatedEnemy extends Collectible implements ActionListener {
 
     /**
      * The stationary enemy that subtracts 1 point from the player when touched. Swaps between 2 sprites
@@ -22,10 +21,9 @@ public class NonAnimatedEnemy extends RegularRewards implements ActionListener {
     protected Timer t;
 
     public NonAnimatedEnemy(int x, int y){
+        super(x,y);
         t = new Timer(750,this);
         t.start();
-        setSize(64,64);
-        setLocation(x,y);
         try{
             sprites[0] = ImageIO.read((getClass().getResourceAsStream("/stalfos1.png")));
             sprites[1] = ImageIO.read((getClass().getResourceAsStream("/stalfos2.png")));

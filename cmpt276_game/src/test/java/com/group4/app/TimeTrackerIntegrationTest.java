@@ -7,13 +7,12 @@ public class TimeTrackerIntegrationTest {
 
     Board currentBoard;
     AppWindow window = new AppWindow();
-    Board board1 = new Board(null,null,null,null,window);
-    boardHolder holder1 = new boardHolder(board1);
+    Board board1 = new Board(window);
 
     @Test
     public void TimeTrackerTest() throws InterruptedException {
         window.setVisible(false);
-        currentBoard = holder1.getHeld();
+        currentBoard = board1;
         currentBoard.startTimer();
         TimeUnit.SECONDS.sleep(5);
         currentBoard.stopTimer();
