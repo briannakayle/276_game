@@ -17,9 +17,9 @@
 ## Running ( Independent, executable .jar file )
 ##### 1. Ensure that you are in the Maven root directory
 ##### 2. After building, enter command
-> java -jar target/App.jar
+> java -jar target/App-jar-with-dependencies.jar
 ##### or, if you want to take the executable elsewhere, simply navigate to its directory and enter the command
-> java -jar App.jar
+> java -jar App-jar-with-dependencies.jar
 ##### 3. Enjoy the game!
 ## Testing
 ##### 1. Ensure that you are in the Maven root directory
