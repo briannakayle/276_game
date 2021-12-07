@@ -10,6 +10,9 @@ public class Bonus extends Collectible{
      * Bonus point that gives the player 3 points. These 3 points do not go towards
      * the player's progress in the game, but serve as a padding to their score to
      * make them feel better.
+     *
+     * @param x the bonus' X-coordinate on screen
+     * @param y the bonus' Y-coordinate on screen
      */
 
     public Bonus(int x, int y) {
