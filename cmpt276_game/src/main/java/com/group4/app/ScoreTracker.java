@@ -8,8 +8,8 @@ public class ScoreTracker {
      * which gets incremented only by coins.
      */
 
-    private int totalScore = 0;
-    private int totalRRewards = 0;
+    private int totalScore = 0; //count player's total score
+    private int totalRRewards = 0; //count the regular reward player got
 
     public void addTotalScore(int i) {
         totalScore += i;
@@ -19,9 +19,12 @@ public class ScoreTracker {
         totalRRewards += i;
     }
 
+
+    //two getter functions
     public int getTotalScore(){
         return totalScore;
     }
+
     public int getTotalRRewards() {
         return totalRRewards;
     }

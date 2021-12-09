@@ -13,6 +13,7 @@ public class TimeTrackerView extends Tracker implements ActionListener {
 
     TimeTracker timeTracker;
 
+    //initialize timeTracker and set its location
     public TimeTrackerView(){
         super();
         timeTracker = new TimeTracker(this);
@@ -20,11 +21,13 @@ public class TimeTrackerView extends Tracker implements ActionListener {
         holder.setLocation(650,30);
         refresh();
     }
+
+    //display seconds on the screen in certain position
     private void refresh(){
         holder.remove(display);
         holder.repaint();
-        display = new JLabel("Time: " + timeTracker.getSeconds(), SwingConstants.LEFT);
-        display.setForeground(Color.white);
+        display = new JLabel("Time: " + timeTracker.getSeconds(), SwingConstants.LEFT); //display seconds
+        display.setForeground(Color.white); //white words
         display.setFont(customFont);
         display.setSize(400,120);
         holder.add(display);
@@ -32,6 +35,7 @@ public class TimeTrackerView extends Tracker implements ActionListener {
         holder.repaint();
     }
 
+    //keep add seconds and refresh the window
     @Override
     public void actionPerformed(ActionEvent e) {
         timeTracker.actionPerformed(e);
