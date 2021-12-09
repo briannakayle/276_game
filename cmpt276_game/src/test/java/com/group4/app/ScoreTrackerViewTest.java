@@ -14,8 +14,8 @@ public class ScoreTrackerViewTest{
         assertEquals(100, sTracker.getHolder().getX());
         assertEquals(30, sTracker.getHolder().getY());
         //check initialized two marks
-        assertEquals(0,sTracker.getMarks());
-        assertEquals(0,sTracker.getRealMarks());
+        assertEquals(0,sTracker.getTotalScore());
+        assertEquals(0,sTracker.getTotalRRewards());
     }
 
     @Test
@@ -23,37 +23,37 @@ public class ScoreTrackerViewTest{
         ScoreTrackerView sTracker = new ScoreTrackerView();
         ScoreTracker scoreTracker = new ScoreTracker();
 
-        scoreTracker.addMarks(1);
-        sTracker.addMarks(1);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(1);
+        sTracker.addTotalScore(1);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
-        scoreTracker.addMarks(2);
-        sTracker.addMarks(2);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(2);
+        sTracker.addTotalScore(2);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
-        scoreTracker.addMarks(3);
-        sTracker.addMarks(3);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(3);
+        sTracker.addTotalScore(3);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
-        scoreTracker.addMarks(4);
-        sTracker.addMarks(4);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(4);
+        sTracker.addTotalScore(4);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
-        scoreTracker.addMarks(210);
-        sTracker.addMarks(210);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(210);
+        sTracker.addTotalScore(210);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
-        scoreTracker.addMarks(-12);
-        sTracker.addMarks(-12);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(-12);
+        sTracker.addTotalScore(-12);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
-        scoreTracker.addMarks(0);
-        sTracker.addMarks(0);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(0);
+        sTracker.addTotalScore(0);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
-        scoreTracker.addMarks(-1);
-        sTracker.addMarks(-1);
-        assertEquals(scoreTracker.getMarks(), sTracker.getMarks());
+        scoreTracker.addTotalScore(-1);
+        sTracker.addTotalScore(-1);
+        assertEquals(scoreTracker.getTotalScore(), sTracker.getTotalScore());
 
     }
 
@@ -62,32 +62,32 @@ public class ScoreTrackerViewTest{
         ScoreTracker scoreTracker = new ScoreTracker();
         ScoreTrackerView sTracker = new ScoreTrackerView();
 
-        scoreTracker.addRealMarks(1);
-        sTracker.addRealMarks(1);
-        assertEquals(scoreTracker.getRealMarks(), sTracker.getRealMarks());
+        scoreTracker.addTotalRRewards(1);
+        sTracker.addTotalRRewards(1);
+        assertEquals(scoreTracker.getTotalRRewards(), sTracker.getTotalRRewards());
 
-        scoreTracker.addRealMarks(2);
-        sTracker.addRealMarks(2);
-        assertEquals(scoreTracker.getRealMarks(), sTracker.getRealMarks());
+        scoreTracker.addTotalRRewards(2);
+        sTracker.addTotalRRewards(2);
+        assertEquals(scoreTracker.getTotalRRewards(), sTracker.getTotalRRewards());
 
-        scoreTracker.addRealMarks(8);
-        sTracker.addRealMarks(8);
-        assertEquals(scoreTracker.getRealMarks(), sTracker.getRealMarks());
+        scoreTracker.addTotalRRewards(8);
+        sTracker.addTotalRRewards(8);
+        assertEquals(scoreTracker.getTotalRRewards(), sTracker.getTotalRRewards());
 
-        scoreTracker.addRealMarks(9);
-        sTracker.addRealMarks(9);
-        assertEquals(scoreTracker.getRealMarks(), sTracker.getRealMarks());
+        scoreTracker.addTotalRRewards(9);
+        sTracker.addTotalRRewards(9);
+        assertEquals(scoreTracker.getTotalRRewards(), sTracker.getTotalRRewards());
 
-        scoreTracker.addRealMarks(100);
-        sTracker.addRealMarks(100);
-        assertEquals(scoreTracker.getRealMarks(), sTracker.getRealMarks());
+        scoreTracker.addTotalRRewards(100);
+        sTracker.addTotalRRewards(100);
+        assertEquals(scoreTracker.getTotalRRewards(), sTracker.getTotalRRewards());
 
-        scoreTracker.addRealMarks(-1);
-        sTracker.addRealMarks(-1);
-        assertEquals(scoreTracker.getRealMarks(), sTracker.getRealMarks());
+        scoreTracker.addTotalRRewards(-1);
+        sTracker.addTotalRRewards(-1);
+        assertEquals(scoreTracker.getTotalRRewards(), sTracker.getTotalRRewards());
 
-        scoreTracker.addRealMarks(-190);
-        sTracker.addRealMarks(-190);
-        assertEquals(scoreTracker.getRealMarks(), sTracker.getRealMarks());
+        scoreTracker.addTotalRRewards(-190);
+        sTracker.addTotalRRewards(-190);
+        assertEquals(scoreTracker.getTotalRRewards(), sTracker.getTotalRRewards());
     }
 }

@@ -206,21 +206,21 @@ class Board extends JLayeredPane implements ActionListener {
     protected void collectPoint(int i, int j, String identifier){
         if ( identifier.equals("RR") ) {
             int score = ((RegularRewards)grid[i][j]).getRRewardsScore();
-            window.updateScoreTracker(score);
-            window.updateRealTracker(score);
+            window.updateTotalScoreTracker(score);
+            window.updateTotalRRewardsTracker(score);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("RR");
         }
         if ( identifier.equals("BR") ) {
             int score = ((Bonus)grid[i][j]).getBonusScore();
-            window.updateScoreTracker(score);
+            window.updateTotalScoreTracker(score);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("RR");
         }
         if ( identifier.equals("NAE") ){
-            window.updateScoreTracker(-1);
+            window.updateTotalScoreTracker(-1);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("NAE");
@@ -330,11 +330,11 @@ class Board extends JLayeredPane implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if ( window.getsTracker().getRealMarks() == 17 ){
+        if ( window.getsTracker().getTotalRRewards() == 17 ){
             window.changeBoard(window.getWinBoard(),-1000000,-10000000);
             window.gameOver();
         }
-        if ( window.getsTracker().getMarks() < 0 ){
+        if ( window.getsTracker().getTotalScore() < 0 ){
             window.changeBoard(window.getGameOverBoard(),-1000000,-10000000);
             window.gameOver();
         }

@@ -26,11 +26,11 @@ public class AppTest {
     @Test
     @DisplayName("ScoreTracker Test")
     public void updateScoreTrackerTest() {
-        window.updateScoreTracker(100);
-        assertEquals(100, window.getsTracker().getMarks());
-        window.updateRealTracker(100);
-        assertEquals(100, window.getsTracker().getMarks());
-        assertEquals(100, window.getsTracker().getRealMarks());
+        window.updateTotalScoreTracker(100);
+        assertEquals(100, window.getsTracker().getTotalScore());
+        window.updateTotalRRewardsTracker(100);
+        assertEquals(100, window.getsTracker().getTotalScore());
+        assertEquals(100, window.getsTracker().getTotalRRewards());
     }
 
     @Test
@@ -56,8 +56,8 @@ public class AppTest {
         board1.addRegularRewards(0,0);
         board1.addNonAnimatedEnemy(0,1);
         board1.collectPoint(0,0,"RR");
-        assert(window.getsTracker().getMarks() == 101);
+        assert(window.getsTracker().getTotalScore() == 101);
         board1.collectPoint(0,1,"NAE");
-        assert(window.getsTracker().getMarks() == 100);
+        assert(window.getsTracker().getTotalScore() == 100);
     }
 }

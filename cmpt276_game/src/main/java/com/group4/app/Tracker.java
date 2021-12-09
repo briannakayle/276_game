@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-class tracker{
+class Tracker {
 
     /**
      * The parent class for either tracker. Sets a common font and point size to be used between the two.
@@ -13,7 +13,7 @@ class tracker{
     protected final JPanel holder;
     protected JLabel display;
     protected Font customFont;
-    public tracker(){
+    public Tracker(){
         holder = new JPanel();
         display = new JLabel("",SwingConstants.LEFT);
         display.setForeground(Color.white);
