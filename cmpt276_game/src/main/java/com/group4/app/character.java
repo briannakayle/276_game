@@ -63,7 +63,6 @@ class character extends baseElement implements ActionListener, KeyListener {
         }
 
         protected void adjust(int width, int height){
-            //setSize(width,height);
             collision.setSize(width, height);
             drawX = (64-width)/2;
             drawY = (64-height)/2;
@@ -169,9 +168,6 @@ class character extends baseElement implements ActionListener, KeyListener {
         setFocusable(true);
     }
 
-    public void stopTimer(){
-        t1.stop();
-    }
     public int getDirection(){
         return direction;
     }
