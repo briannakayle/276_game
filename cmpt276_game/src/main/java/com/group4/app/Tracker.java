@@ -17,7 +17,7 @@ class Tracker {
         holder = new JPanel();
         display = new JLabel("",SwingConstants.LEFT);
         display.setForeground(Color.white);
-        try {
+        try { //try specified front
             customFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/font.ttf")).deriveFont(48f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
