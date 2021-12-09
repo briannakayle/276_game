@@ -205,8 +205,9 @@ class Board extends JLayeredPane implements ActionListener {
 
     protected void collectPoint(int i, int j, String identifier){
         if ( identifier.equals("RR") ) {
-            int score = ((RegularRewards)grid[i][j]).getrewardsScore();
+            int score = ((RegularRewards)grid[i][j]).getRRewardsScore();
             window.updateScoreTracker(score);
+            window.updateRealTracker(score);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("RR");
