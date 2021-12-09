@@ -212,7 +212,8 @@ class Board extends JLayeredPane implements ActionListener {
             tempSound.play("RR");
         }
         if ( identifier.equals("BR") ) {
-            window.updateScoreTracker(3);
+            int score = ((Bonus)grid[i][j]).getBonusScore();
+            window.updateScoreTracker(score);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("RR");
