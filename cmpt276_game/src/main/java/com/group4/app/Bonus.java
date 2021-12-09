@@ -3,6 +3,7 @@ package com.group4.app;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Bonus extends RegularRewards{
 
@@ -12,12 +13,18 @@ public class Bonus extends RegularRewards{
      * make them feel better.
      */
 
+    int bonusScore = ThreadLocalRandom.current().nextInt(1, 3 + 1); //random int [1,3]
+
     public Bonus(int x, int y) {
         super(x, y);
         try {
             image = ImageIO.read((getClass().getResourceAsStream("/bonus.png")));
         }catch (IOException e) { System.out.println("Bonus Sprite not found"); }
 
+    }
+
+    public int getBonusScore(){
+        return bonusScore;
     }
 
     @Override
