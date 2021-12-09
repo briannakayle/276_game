@@ -3,7 +3,6 @@ package com.group4.app;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Bonus extends Collectible{
 
@@ -19,6 +18,7 @@ public class Bonus extends Collectible{
     int bonusScore = 3;
 
     public Bonus(int x, int y) {
+        ////This method is meant to draw the Bonus cell at position with X-cooridnate x, Y-coordinate Y
         super(x, y);
         try {
             image = ImageIO.read((getClass().getResourceAsStream("/bonus.png")));
@@ -35,6 +35,7 @@ public class Bonus extends Collectible{
         super.paintComponent(g);
         g.drawImage(image, 16, 0, this);
     }
+    // Override to paint the connect toggle
 
     @Override
     public String getIdentifier() {

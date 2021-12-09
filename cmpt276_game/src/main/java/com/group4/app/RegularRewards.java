@@ -17,6 +17,7 @@ class RegularRewards extends Collectible{
     }
 
     public RegularRewards(int x, int y){
+        //This method is meant to draw the regularRewards cell at position with X-cooridnate x, Y-coordinate Y
         super(x, y);
         try {
             image = ImageIO.read((getClass().getResourceAsStream("/point.png")));
@@ -27,7 +28,7 @@ class RegularRewards extends Collectible{
         super.paintComponent(g);
         g.drawImage(image, 16, 0, this);
     }
-
+    // Override to paint the connect toggle
     @Override
     public String getIdentifier() {
         return "RR";
