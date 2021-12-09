@@ -16,7 +16,7 @@ public class Bonus extends Collectible{
      * @param y the bonus' Y-coordinate on screen
      */
 
-    int bonusScore = ThreadLocalRandom.current().nextInt(1, 3 + 1); //random int [1,3]
+    int bonusScore = 3;
 
     public Bonus(int x, int y) {
         super(x, y);
