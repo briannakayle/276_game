@@ -10,7 +10,12 @@ class RegularRewards extends Collectible{
      * The main points that are found scattered across the maze, that increment the player's Marks and realMarks
      * by 1. The player must collect all 17 to win the game.
      */
- 
+    private int mark=1;
+    
+    public int getrewardsScore(){
+        return mark;
+    }
+
     public RegularRewards(int x, int y){
         super(x, y);
         try {
