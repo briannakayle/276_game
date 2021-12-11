@@ -15,7 +15,10 @@ public class Bonus extends Collectible{
      * @param y the bonus' Y-coordinate on screen
      */
 
+    int bonusScore = 3;
+
     public Bonus(int x, int y) {
+        ////This method is meant to draw the Bonus cell at position with X-cooridnate x, Y-coordinate Y
         super(x, y);
         try {
             image = ImageIO.read((getClass().getResourceAsStream("/bonus.png")));
@@ -23,11 +26,16 @@ public class Bonus extends Collectible{
 
     }
 
+    public int getBonusScore(){
+        return bonusScore;
+    }
+
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(image, 16, 0, this);
     }
+    // Override to paint the connect toggle
 
     @Override
     public String getIdentifier() {

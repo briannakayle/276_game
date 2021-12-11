@@ -11,10 +11,10 @@ public class BonusIntegrationTest {
         ScoreTrackerView scoreTrackerView = new ScoreTrackerView();
         ScoreTracker scoreTracker = new ScoreTracker();
 
-        scoreTracker.addMarks(2);
-        scoreTrackerView.addMarks(2);
-        assertEquals(2, scoreTrackerView.getMarks());
-        assertEquals(2, scoreTracker.getMarks());
+        scoreTracker.addTotalScore(2);
+        scoreTrackerView.addTotalScore(2);
+        assertEquals(2, scoreTrackerView.getTotalScore());
+        assertEquals(2, scoreTracker.getTotalScore());
 
     }
     @Test

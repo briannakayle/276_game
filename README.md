@@ -14,6 +14,11 @@
 ##### 2. Enter command
 > mvn clean compile package assembly:single
 ##### This command will go through the same process as the other, while additionally building an extra executable .jar file. The compiled artifacts will be created in /target/
+## Generating Javadoc
+##### 1. Ensure that you are in the Maven root directory
+##### 2. Enter command
+> mvn javadoc:javadoc
+##### 3. The Javadoc will be outputted to /target/javadoc-report
 ## Running ( Independent, executable .jar file )
 ##### 1. Ensure that you are in the Maven root directory
 ##### 2. After building, enter command
@@ -27,3 +32,5 @@
 > mvn clean test
 ##### 3. The JUnit test results will be outputted to .txt files in /target/surefire-reports
 
+## Video Link: 
+### https://drive.google.com/file/d/1h_825hc3hRr1vR8n3COf_YIuw3bJK6hs/view?usp=sharing

@@ -26,7 +26,7 @@ class Board extends JLayeredPane implements ActionListener {
     protected BufferedImage BaseBoard;
     protected AppWindow window;
     protected int bonusTicker = 0;
-    protected int bX, bY;
+    protected int bonusX, bonusY;
     protected character player;
     protected  MovingEnemy mEnemy;
     protected int contact = 0;
@@ -150,8 +150,8 @@ class Board extends JLayeredPane implements ActionListener {
             grid[x][y] = new Bonus((x * 64) + 128, (y * 64) + 304);
             add(grid[x][y]);
             grid[x][y].repaint();
-            bX = x;
-            bY = y;
+            bonusX = x;
+            bonusY = y;
         }
         else System.out.println("Grid spot already occupied");
     }
@@ -205,20 +205,22 @@ class Board extends JLayeredPane implements ActionListener {
 
     protected void collectPoint(int i, int j, String identifier){
         if ( identifier.equals("RR") ) {
-            window.updateScoreTracker(1);
-            window.updateRealTracker(1);
+            int score = ((RegularRewards)grid[i][j]).getRRewardsScore();
+            window.updateTotalScoreTracker(score);
+            window.updateTotalRRewardsTracker(score);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("RR");
         }
         if ( identifier.equals("BR") ) {
-            window.updateScoreTracker(3);
+            int score = ((Bonus)grid[i][j]).getBonusScore();
+            window.updateTotalScoreTracker(score);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("RR");
         }
         if ( identifier.equals("NAE") ){
-            window.updateScoreTracker(-1);
+            window.updateTotalScoreTracker(-1);
             remove(grid[i][j]);
             grid[i][j] = null;
             tempSound.play("NAE");
@@ -234,9 +236,9 @@ class Board extends JLayeredPane implements ActionListener {
     }
 
     private void removeBonus(){
-        if ( grid[bX][bY] != null ) {
-            remove(grid[bX][bY]);
-            grid[bX][bY] = null;
+        if ( grid[bonusX][bonusY] != null ) {
+            remove(grid[bonusX][bonusY]);
+            grid[bonusX][bonusY] = null;
             repaint();
         }
     }
@@ -249,17 +251,17 @@ class Board extends JLayeredPane implements ActionListener {
 
     protected int checkMEnemyCollision(){
         collisionBox enemyProjectedBox = new collisionBox(mEnemy.getX()+16,mEnemy.getY()+16,32,32);
-        int eX = (int)enemyProjectedBox.getX();
-        int eY = (int)enemyProjectedBox.getY();
+        int enemyX = (int)enemyProjectedBox.getX();
+        int enemyY = (int)enemyProjectedBox.getY();
 
         if (mEnemy.getDirection() == 180)
-            enemyProjectedBox.setLocation(eX - 10, eY);
+            enemyProjectedBox.setLocation(enemyX - 10, enemyY);
         if (mEnemy.getDirection() == 0)
-            enemyProjectedBox.setLocation(eX + 10, eY);
+            enemyProjectedBox.setLocation(enemyX + 10, enemyY);
         if (mEnemy.getDirection() == 270)
-            enemyProjectedBox.setLocation(eX, eY + 10);
+            enemyProjectedBox.setLocation(enemyX, enemyY + 10);
         if (mEnemy.getDirection() == 90)
-            enemyProjectedBox.setLocation(eX, eY - 10);
+            enemyProjectedBox.setLocation(enemyX, enemyY - 10);
 
         for ( int i = 0; i<8; i++ ) {
             if (enemyProjectedBox.intersects(baseCollisionBoxes[i])) {
@@ -278,17 +280,17 @@ class Board extends JLayeredPane implements ActionListener {
         Collectible test1;
         collisionBox playerProjectedBox = new collisionBox(player.getX(),player.getY(),64,64);
 
-        int pX = (int)playerProjectedBox.getX();
-        int pY = (int)playerProjectedBox.getY();
+        int playerX = (int)playerProjectedBox.getX();
+        int playerY = (int)playerProjectedBox.getY();
 
         if (player.getDirection() == 180)
-            playerProjectedBox.setLocation(pX - 10, pY);
+            playerProjectedBox.setLocation(playerX - 10, playerY);
         if (player.getDirection() == 0)
-            playerProjectedBox.setLocation(pX + 10, pY);
+            playerProjectedBox.setLocation(playerX + 10, playerY);
         if (player.getDirection() == 270 || player.getDirection() == -1)
-            playerProjectedBox.setLocation(pX, pY + 10);
+            playerProjectedBox.setLocation(playerX, playerY + 10);
         if (player.getDirection() == 90)
-            playerProjectedBox.setLocation(pX, pY - 10);
+            playerProjectedBox.setLocation(playerX, playerY - 10);
 
         for ( int i = 0; i<8; i++ ) {
             if (playerProjectedBox.intersects(baseCollisionBoxes[i])) {
@@ -328,11 +330,11 @@ class Board extends JLayeredPane implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if ( window.getsTracker().getRealMarks() == 17 ){
+        if ( window.getsTracker().getTotalRRewards() == 17 ){
             window.changeBoard(window.getWinBoard(),-1000000,-10000000);
             window.gameOver();
         }
-        if ( window.getsTracker().getMarks() < 0 ){
+        if ( window.getsTracker().getTotalScore() < 0 ){
             window.changeBoard(window.getGameOverBoard(),-1000000,-10000000);
             window.gameOver();
         }

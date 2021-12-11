@@ -16,7 +16,7 @@ public class TimeTracker implements ActionListener {
 
     public TimeTracker(ActionListener listener) {
         t = new Timer(1000,listener);
-    }
+    } //1 second  = 1000 million second
 
     public int getSeconds(){
         return seconds;

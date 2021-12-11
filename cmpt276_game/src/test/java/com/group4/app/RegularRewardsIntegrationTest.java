@@ -11,10 +11,10 @@ public class RegularRewardsIntegrationTest {
         ScoreTrackerView scoreTrackerView = new ScoreTrackerView();
         ScoreTracker scoreTracker = new ScoreTracker();
 
-        scoreTracker.addMarks(1);
-        scoreTrackerView.addMarks(1);
-        assertEquals(1, scoreTrackerView.getMarks());
-        assertEquals(1, scoreTracker.getMarks());
+        scoreTracker.addTotalScore(1);
+        scoreTrackerView.addTotalScore(1);
+        assertEquals(1, scoreTrackerView.getTotalScore());
+        assertEquals(1, scoreTracker.getTotalScore());
 
     }
     @Test

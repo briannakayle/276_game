@@ -48,12 +48,12 @@ class AppWindow extends JFrame{
         add(target);
     }
 
-    public void updateScoreTracker(int i){
-        sTracker.addMarks(i);
+    public void updateTotalScoreTracker(int i){
+        sTracker.addTotalScore(i);
     }
 
-    public void updateRealTracker(int i){
-        sTracker.addRealMarks(i);
+    public void updateTotalRRewardsTracker(int i){
+        sTracker.addTotalRRewards(i);
     }
 
     public ScoreTrackerView getsTracker() {

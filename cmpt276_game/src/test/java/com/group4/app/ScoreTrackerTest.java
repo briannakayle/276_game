@@ -9,48 +9,48 @@ public class ScoreTrackerTest {
     public void addMarksTest(){
         ScoreTracker sTracker = new ScoreTracker();
 
-        sTracker.addMarks(0);
-        assertEquals(0, sTracker.getMarks());
+        sTracker.addTotalScore(0);
+        assertEquals(0, sTracker.getTotalScore());
 
         for(int i = 0; i < 10; i++){
-            sTracker.addMarks(1);
+            sTracker.addTotalScore(1);
         } //after loop, marks = 10
-        assertEquals(10, sTracker.getMarks());
+        assertEquals(10, sTracker.getTotalScore());
 
         //test for deleting 1
         for (int i = 0; i < 9; i++) {
-            sTracker.addMarks(-1);
+            sTracker.addTotalScore(-1);
         } //after loop, marks = 1
-        assertEquals(1, sTracker.getMarks());
+        assertEquals(1, sTracker.getTotalScore());
 
-        sTracker.addMarks(9);
-        assertEquals(10, sTracker.getMarks());
-        sTracker.addMarks(-7);
-        assertEquals(3, sTracker.getMarks());
+        sTracker.addTotalScore(9);
+        assertEquals(10, sTracker.getTotalScore());
+        sTracker.addTotalScore(-7);
+        assertEquals(3, sTracker.getTotalScore());
     }
 
     @Test
     public void addRealMarksTest() {
         ScoreTracker sTracker = new ScoreTracker();
-        sTracker.addRealMarks(0);
-        assertEquals(0, sTracker.getRealMarks());
+        sTracker.addTotalRRewards(0);
+        assertEquals(0, sTracker.getTotalRRewards());
 
         //test for adding 1
         for(int i = 0; i < 10; i++){
-            sTracker.addRealMarks(1);
+            sTracker.addTotalRRewards(1);
         } //after loop, marks = 10
-        assertEquals(10, sTracker.getRealMarks());
+        assertEquals(10, sTracker.getTotalRRewards());
 
         //test for deleting 1
         for(int i = 0; i < 9; i++){
-            sTracker.addRealMarks(-1);
+            sTracker.addTotalRRewards(-1);
         } //after loop, marks = 1
-        assertEquals(1, sTracker.getRealMarks());
+        assertEquals(1, sTracker.getTotalRRewards());
 
-        sTracker.addRealMarks(9);
-        assertEquals(10, sTracker.getRealMarks());
-        sTracker.addRealMarks(-7);
-        assertEquals(3, sTracker.getRealMarks());
+        sTracker.addTotalRRewards(9);
+        assertEquals(10, sTracker.getTotalRRewards());
+        sTracker.addTotalRRewards(-7);
+        assertEquals(3, sTracker.getTotalRRewards());
     }
 }
 
