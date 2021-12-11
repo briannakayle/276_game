@@ -12,6 +12,16 @@ public class BoardTest {
         board = new Board(null);
     }
 
+    @BeforeEach
+    public void cleanup(){
+        for ( int i = 0; i < 12; i++ ){
+            for ( int j = 0; j < 7; j++ ){
+                board.grid[i][j] = null;
+            }
+        }
+        board.removeAll();
+    }
+
     @Test
     @DisplayName("BoardSetupTest")
     public void constructorTest(){
