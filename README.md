@@ -7,7 +7,7 @@
 ## Running ( Class-dependent .jar file )
 ##### 1. Ensure that you are in the Maven root directory
 ##### 2. After building, enter command
-> java -cp target/graphics.jar com.group4.app.AppWindow
+> java -cp target/graphics.jar com.group4.app.AppWindow or java -cp target/App.jar com.group4.app.AppWindow 
 ##### 3. Enjoy the game!
 ## Building ( Independent, executable .jar file )
 ##### 1. In your terminal, navigate to Maven root directory (i.e. the directory with pom.xml)
